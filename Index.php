@@ -18,7 +18,7 @@
      <!-- Header Navigation -->
      <nav class="navbar">
         <ul>
-            <li><a href="Index.php">Home</a></li>
+            <li><a href="index.php">Home</a></li>
             <li><a href="problemPage.php">Problem</a></li>
             <li><a href="signupPage.php">Signup</a></li>
             <li><a href="loginPage.php">Login</a></li>
