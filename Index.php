@@ -15,7 +15,15 @@
     <title>Document</title>
 </head>
 <body>
-    <!-- Header -->
+     <!-- Header Navigation -->
+     <nav class="navbar">
+        <ul>
+            <li><a href="Index.php">Home</a></li>
+            <li><a href="problemPage.php">Problem</a></li>
+            <li><a href="signupPage.php">Signup</a></li>
+            <li><a href="loginPage.php">Login</a></li>
+        </ul>
+    </nav>
     
     <!-- Welcome -->
 <div class = "welcome">
@@ -76,7 +84,9 @@
 
 <div class = "buttonHolder">
     <h5> Dont Have a account?</h5>
-    <button href="signupPage.php"> Signup </button>
+    <a href="http://localhost/Lean-Six-Sigma/signupPage.php">
+    <button>Signup</button>
+    </a>
 </div>
 
     <!-- footer -->
