@@ -15,8 +15,13 @@
     <title>Document</title>
 </head>
 <body>
-     <!-- Header Navigation -->
-     <nav class="navbar">
+    <!-- Header -->
+<header class="main-header">
+    <div class="logo">
+        <h1>Jogablogwen <span>Code Recovery</span></h1>
+        <p class="tagline">Restoring code. Rebuilding confidence.</p>
+    </div>
+    <nav class="navbar">
         <ul>
             <li><a href="index.php">Home</a></li>
             <li><a href="problemPage.php">Problem</a></li>
@@ -24,12 +29,12 @@
             <li><a href="loginPage.php">Login</a></li>
         </ul>
     </nav>
+</header>
     
     <!-- Welcome -->
-<div class = "welcome">
-    <h1> Welcome to Jogablogwen Code Recovery </h1>
-</div>
-
+    <div class="welcome">
+    Welcome to <span style="color:#1CD8D2;">Jogablogwen Code Recovery</span>
+    </div>
     <!-- General description of website -->
 <div class = "desc">
     <h5> 
@@ -52,44 +57,55 @@
     <!-- Why us? -->
 <div class = "whyUs">
 
-    <h3>
+    <h1>
         Why Us?
-    </h3>
+    </h1>
 
-    <h4>
+    <h3>
         Targeted Expertise:
-    </h4>
+    </h3>
 
     <h5>
         No noise, just C#, JavaScript, and PHP discussions.
     </h5>
 
-    <h4>
+    <h3>
         Community-Powered:
-    </h4>
+    </h3>
 
     <h5>
         Learn, share, and grow with other developers.
     </h5>
 
-    <h4>
-        Community-Powered:
-    </h4>
+    <h3>
+    Quick Fixes & Deep Dives:
+    </h3>
 
     <h5>
-        Learn, share, and grow with other developers.
+    From simple syntax errors to advanced debugging.
     </h5>
 
 </div>
 
 <div class = "buttonHolder">
-    <h5> Dont Have a account?</h5>
+    <h3> Dont Have a account?</h3>
     <a href="http://localhost/Lean-Six-Sigma/signupPage.php">
     <button>Signup</button>
     </a>
 </div>
 
     <!-- footer -->
+    <footer class="footer">
+    <div class="footer-content">
+        <p>&copy; 2025 Jogablogwen Code Recovery. All rights reserved.</p>
+        <div class="footer-links">
+            <a href="index.php">Home</a>
+            <a href="problemPage.php">Problem</a>
+            <a href="signupPage.php">Signup</a>
+            <a href="loginPage.php">Login</a>
+        </div>
+    </div>
+</footer>
 
 
 </body>
