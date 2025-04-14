@@ -185,7 +185,43 @@ body {
 .footer-links a:hover {
     color: #00BFFF; /* Electric Blue */
 }
+
+
 /* Problem Page */
+
+.post-intro {
+    background-color: #0E213F;
+    color: #F4F4F4;
+    padding: 40px 30px;
+    border-radius: 10px;
+    margin: 150px auto;
+    max-width: 800px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+.post-intro h2 {
+    color: #1CD8D2;
+    margin-bottom: 20px;
+    font-size: 28px;
+}
+
+.post-intro p {
+    font-size: 16px;
+    line-height: 1.6;
+    margin-bottom: 15px;
+}
+
+.post-intro .highlight {
+    color: #38B6FF; /* Sky Blue */
+    font-weight: bold;
+}
+
+
+
+
+
+
+/* post Problem Page */
 
 .problem-page {
     color: rgba(128, 0, 128, 0.993);

@@ -46,8 +46,38 @@
     </script>
 
 
+    <!-- Post a Problem Intro -->
+    <section class="post-intro">
+        <h2>🛠 Post a Problem</h2>
+        <p>
+            Welcome to the heart of <strong>Jogablogwen Code Recovery</strong> — where problems meet solutions.
+        </p>
+        <p>
+            Got a bug you can’t squash? A confusing error message? Or just code that won’t behave the way it should? You’re in the right place.
+            Here, you can post your issue, share your code, and get real help from real developers who speak your language — 
+            whether it’s <span class="highlight">C#</span>, <span class="highlight">JavaScript</span>, or <span class="highlight">PHP</span>.
+        </p>
+        <p>
+            💡 <em>Be as detailed as you can — the more context you give, the faster we can help you fix it.</em>  
+            Let’s get your code back on track.
+        </p>
+        <div class = "buttonHolder">
+            <h3> Want To Post Your Own Problem?</h3>
+            <a href="http://localhost/Lean-Six-Sigma/postProblemPage.php">
+                <button>Click Here!</button>
+            </a>
+    </div>
+
+    </section>
 
 
+
+   
+    <!-- Box that contain a problem  and a button to reply-->
+    <div>
+
+        
+    </div>
 
 
 

@@ -11,7 +11,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" type="image/x-icon" href="/images/favicon-16x16.png">
+    <link rel="icon" type="image/x-icon" href="/images/favicon.ico">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/index.css">
     <title>Document</title>
@@ -49,14 +49,16 @@
             header.style.top = "-100px"; // Adjust based on header height
             }
 
-    prevScrollPos = currentScrollPos;
-  };
-</script>
+            prevScrollPos = currentScrollPos;
+        };
+    </script>
+
     <!-- Welcome -->
     <div class="welcome">
     Welcome to <span style="color:#1CD8D2;">Jogablogwen Code Recovery</span>
     </div>
 
+    <!-- Logo -->
     <img src="images/logoideaNoBackground.jpeg" alt="Logo"  class = "imageLogo" >
 
     <!-- General description of website -->
