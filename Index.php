@@ -16,7 +16,9 @@
     <link rel="stylesheet" href="css/index.css">
     <title>Document</title>
 </head>
+
 <body>
+
         <!-- navbar -->
     <header class="main-header">
         <div class="logo">
@@ -32,23 +34,27 @@
             </ul>
         </nav>
     </header>
+
+
     <!-- script to make nav bar reactive -->
     <script>
-  let prevScrollPos = window.pageYOffset;
-  const header = document.querySelector(".main-header");
+        let prevScrollPos = window.pageYOffset;
+        const header = document.querySelector(".main-header");
 
-  window.onscroll = function () {
-    let currentScrollPos = window.pageYOffset;
+        window.onscroll = function () {
+            let currentScrollPos = window.pageYOffset;
 
-    if (prevScrollPos > currentScrollPos) {
-      header.style.top = "0";
-    } else {
-      header.style.top = "-100px"; // Adjust based on header height
-    }
+            if (prevScrollPos > currentScrollPos) {
+            header.style.top = "0";
+            } else {
+            header.style.top = "-100px"; // Adjust based on header height
+            }
 
-    prevScrollPos = currentScrollPos;
-  };
-</script>
+            prevScrollPos = currentScrollPos;
+        };
+    </script>
+
+
     <!-- Welcome -->
     <div class="welcome">
     Welcome to <span style="color:#1CD8D2;">Jogablogwen Code Recovery</span>
@@ -57,76 +63,76 @@
     <img src="images/logoideaNoBackground.jpeg" alt="Logo"  class = "imageLogo" >
 
     <!-- General description of website -->
-<div class = "desc">
-    <h5> 
-        Welcome to Jogablogwen Code Recovery – Your C#, JavaScript, and PHP Problem Solver 
-    </h5>
+    <div class = "desc">
+        <h5> 
+            Welcome to Jogablogwen Code Recovery – Your C#, JavaScript, and PHP Problem Solver 
+        </h5>
 
-    <h5>
-        At Jogablogwen Code Recovery, we know the frustration of debugging, fixing broken code, and hunting down elusive errors. 
-        That’s why we’ve built a focused, developer-friendly community dedicated to solving issues in C#, JavaScript, and PHP.
-        Whether you're struggling with a C# runtime error, a tricky JavaScript bug, 
-        or a PHP database issue, our platform is designed to help you get clear, 
-        fast, and effective solutions from fellow developers who specialize in these languages.
-    </h5>
-    
-    <h5> 
-        Got a coding issue? Post your question and let the community help you recover your code!
-    </h5>
-</div>
+        <h5>
+            At Jogablogwen Code Recovery, we know the frustration of debugging, fixing broken code, and hunting down elusive errors. 
+            That’s why we’ve built a focused, developer-friendly community dedicated to solving issues in C#, JavaScript, and PHP.
+            Whether you're struggling with a C# runtime error, a tricky JavaScript bug, 
+            or a PHP database issue, our platform is designed to help you get clear, 
+            fast, and effective solutions from fellow developers who specialize in these languages.
+        </h5>
+        
+        <h5> 
+            Got a coding issue? Post your question and let the community help you recover your code!
+        </h5>
+    </div>
 
     <!-- Why us? -->
-<div class = "whyUs">
+    <div class = "whyUs">
 
-    <h1>
-        Why Us?
-    </h1>
+        <h1>
+            Why Us?
+        </h1>
 
-    <h3>
-        Targeted Expertise:
-    </h3>
+        <h3>
+            Targeted Expertise:
+        </h3>
 
-    <h5>
-        No noise, just C#, JavaScript, and PHP discussions.
-    </h5>
+        <h5>
+            No noise, just C#, JavaScript, and PHP discussions.
+        </h5>
 
-    <h3>
-        Community-Powered:
-    </h3>
+        <h3>
+            Community-Powered:
+        </h3>
 
-    <h5>
-        Learn, share, and grow with other developers.
-    </h5>
+        <h5>
+            Learn, share, and grow with other developers.
+        </h5>
 
-    <h3>
-    Quick Fixes & Deep Dives:
-    </h3>
+        <h3>
+        Quick Fixes & Deep Dives:
+        </h3>
 
-    <h5>
-    From simple syntax errors to advanced debugging.
-    </h5>
+        <h5>
+        From simple syntax errors to advanced debugging.
+        </h5>
 
-</div>
+    </div>
 
-<div class = "buttonHolder">
-    <h3> Dont Have a account?</h3>
-    <a href="http://localhost/Lean-Six-Sigma/signupPage.php">
-    <button>Signup</button>
-    </a>
-</div>
+    <div class = "buttonHolder">
+        <h3> Dont Have a account?</h3>
+        <a href="http://localhost/Lean-Six-Sigma/signupPage.php">
+        <button>Signup</button>
+        </a>
+    </div>
 
     <!-- footer -->
     <footer class="footer">
-    <div class="footer-content">
-        <p>&copy; 2025 Jogablogwen Code Recovery. All rights reserved.</p>
-        <div class="footer-links">
-            <a href="index.php">Home</a>
-            <a href="problemPage.php">Problem</a>
-            <a href="signupPage.php">Signup</a>
-            <a href="loginPage.php">Login</a>
+        <div class="footer-content">
+            <p>&copy; 2025 Jogablogwen Code Recovery. All rights reserved.</p>
+            <div class="footer-links">
+                <a href="index.php">Home</a>
+                <a href="problemPage.php">Problem</a>
+                <a href="signupPage.php">Signup</a>
+                <a href="loginPage.php">Login</a>
+            </div>
         </div>
-    </div>
-</footer>
+    </footer>
 
 
 </body>
