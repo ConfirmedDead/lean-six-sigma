@@ -18,7 +18,6 @@
 </head>
 
 <body>
-
         <!-- navbar -->
     <header class="main-header">
         <div class="logo">
@@ -50,11 +49,9 @@
             header.style.top = "-100px"; // Adjust based on header height
             }
 
-            prevScrollPos = currentScrollPos;
-        };
-    </script>
-
-
+    prevScrollPos = currentScrollPos;
+  };
+</script>
     <!-- Welcome -->
     <div class="welcome">
     Welcome to <span style="color:#1CD8D2;">Jogablogwen Code Recovery</span>
@@ -123,16 +120,16 @@
 
     <!-- footer -->
     <footer class="footer">
-        <div class="footer-content">
-            <p>&copy; 2025 Jogablogwen Code Recovery. All rights reserved.</p>
-            <div class="footer-links">
-                <a href="index.php">Home</a>
-                <a href="problemPage.php">Problem</a>
-                <a href="signupPage.php">Signup</a>
-                <a href="loginPage.php">Login</a>
-            </div>
+    <div class="footer-content">
+        <p>&copy; 2025 Jogablogwen Code Recovery. All rights reserved.</p>
+        <div class="footer-links">
+            <a href="index.php">Home</a>
+            <a href="problemPage.php">Problem</a>
+            <a href="signupPage.php">Signup</a>
+            <a href="loginPage.php">Login</a>
         </div>
-    </footer>
+    </div>
+</footer>
 
 
 </body>
