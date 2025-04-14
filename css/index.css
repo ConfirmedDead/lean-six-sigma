@@ -11,7 +11,7 @@ body {
 /* Header text */
 .welcome {
     text-align: center;
-    padding: 40px 20px 10px;
+    padding: 150px 20px 10px;
     font-size: 2.2em;
     font-weight: bold;
     color: #ffffff;
@@ -33,6 +33,7 @@ body {
     margin: 0 auto 30px;
     border-radius: 10px;
     box-shadow: 0px 0px 10px #1CD8D2;
+    text-align: center;
 }
 
 .whyUs h3 {
@@ -83,9 +84,26 @@ body {
     background-color: #38B6FF;
 }
 
+/* Logo but image*/
+.imageLogo {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%; 
+    padding-top: 20px;
+    padding-bottom: 40px;
+
+}
+
 /* Navbar */
 .main-header {
-    background-color: #0B1B36; /* Midnight Navy */
+    position: fixed;            /* So it stays at the top */
+    top: 0;                     /* Visible by default */
+    width: 100%;                /* Full width */
+    z-index: 999;               /* Stays on top */
+    transition: top 0.3s;       /* Smooth slide effect */
+    
+    background-color: #0B1B36;  /* Midnight Navy */
     padding: 20px 30px;
     display: flex;
     justify-content: space-between;
@@ -94,6 +112,7 @@ body {
     color: #F4F4F4;
     border-bottom: 2px solid #1CD8D2;
 }
+
 
 .logo h1 {
     margin: 0;
@@ -110,7 +129,9 @@ body {
     color: #38B6FF; /* Sky Blue */
     margin-top: 4px;
 }
-
+.navbar {
+    margin-right: 40px;
+}
 .navbar ul {
     list-style: none;
     display: flex;

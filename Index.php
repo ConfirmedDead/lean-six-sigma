@@ -5,36 +5,57 @@
 
 ?>
 
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="/images/favicon-16x16.png">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/index.css">
     <title>Document</title>
 </head>
 <body>
-    <!-- Header -->
-<header class="main-header">
-    <div class="logo">
-        <h1>Jogablogwen <span>Code Recovery</span></h1>
-        <p class="tagline">Restoring code. Rebuilding confidence.</p>
-    </div>
-    <nav class="navbar">
-        <ul>
-            <li><a href="index.php">Home</a></li>
-            <li><a href="problemPage.php">Problem</a></li>
-            <li><a href="signupPage.php">Signup</a></li>
-            <li><a href="loginPage.php">Login</a></li>
-        </ul>
-    </nav>
-</header>
-    
+        <!-- navbar -->
+    <header class="main-header">
+        <div class="logo">
+            <h1>Jogablogwen <span>Code Recovery</span></h1>
+            <p class="tagline">Restoring code. Rebuilding confidence.</p>
+        </div>
+        <nav class="navbar">
+            <ul>
+                <li><a href="index.php">Home</a></li>
+                <li><a href="problemPage.php">Problem</a></li>
+                <li><a href="signupPage.php">Signup</a></li>
+                <li><a href="loginPage.php">Login</a></li>
+            </ul>
+        </nav>
+    </header>
+    <!-- script to make nav bar reactive -->
+    <script>
+  let prevScrollPos = window.pageYOffset;
+  const header = document.querySelector(".main-header");
+
+  window.onscroll = function () {
+    let currentScrollPos = window.pageYOffset;
+
+    if (prevScrollPos > currentScrollPos) {
+      header.style.top = "0";
+    } else {
+      header.style.top = "-100px"; // Adjust based on header height
+    }
+
+    prevScrollPos = currentScrollPos;
+  };
+</script>
     <!-- Welcome -->
     <div class="welcome">
     Welcome to <span style="color:#1CD8D2;">Jogablogwen Code Recovery</span>
     </div>
+
+    <img src="images/logoideaNoBackground.jpeg" alt="Logo"  class = "imageLogo" >
+
     <!-- General description of website -->
 <div class = "desc">
     <h5> 
