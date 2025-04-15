@@ -1,4 +1,36 @@
 <?php
+// Include your database connection class
+require_once 'DBConn.php';
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    // Retrieve the problem from the form
+    $problem = $_POST['problem'];
+
+    // Check if the problem is not empty
+    if (!empty($problem)) {
+        // Create a new database connection
+        $db = new DBConn();
+        $db->open();
+
+        // Prepare the SQL query to insert the problem
+        $stmt = $db->conn->prepare("INSERT INTO problems (problem_description) VALUES (?)");
+        $stmt->bind_param("s", $problem);
+
+        // Execute the query and check for success
+        if ($stmt->execute()) {
+            echo "<p>Problem posted successfully!</p>";
+        } else {
+            echo "<p>Error: " . $stmt->error . "</p>";
+        }
+
+        // Close the statement and connection
+        $stmt->close();
+        $db->close();
+    } else {
+        echo "<p>Please enter your problem.</p>";
+    }
+}
+?>
 
 ?>
 <!DOCTYPE html>
@@ -45,16 +77,14 @@
         };
     </script>
 
-<div class = "problem-page">
-    <h1> Jogablogwen Problem Page </h1>
-</div>
-<tr>
+    <!-- Welcome -->
         <h1 class="problem-page">Post Your Problem Here</h1>
-        <textarea rows="45" cols="250"></textarea>
-    
-        <td>&nbsp;</td>
-        <td><input type="submit" name="submit" value="submit"></td>
-    </tr>
+        <form method="POST" action="postProblemPage.php">
+    <h1 class="problem-page">Post Your Problem Here</h1>
+    <textarea name="problem" rows="10" cols="50"></textarea>
+    <br>
+    <input type="submit" name="submit" value="Submit">
+</form>
         
     <!-- footer -->
     <footer class="footer">

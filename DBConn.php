@@ -1,17 +1,29 @@
+
 <?php
+class DBConn {
+    public $conn;
 
-    class DBConn{
+    // Open a database connection
+    public function open() {
+        $host = "localhost"; // Database host
+        $username = "root";  // Database username
+        $password = "password";      // Database password
+        $dbname = "jogablogwen-code-recovery"; // Database name
 
-        public $conn;
+        // Create connection
+        $this->conn = new mysqli($host, $username, $password, $dbname);
 
-        public function open() {
-            $this->conn = new mysqli("localhost", "root", "password", "jogablogwen-code-recovery"); 
+        // Check connection
+        if ($this->conn->connect_error) {
+            die("Connection failed: " . $this->conn->connect_error);
         }
-    
-        public function close(){
-            $this->conn -> close();
-        }
-
     }
 
+    // Close the database connection
+    public function close() {
+        if ($this->conn) {
+            $this->conn->close();
+        }
+    }
+}
 ?>
