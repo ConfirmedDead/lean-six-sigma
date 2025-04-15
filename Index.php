@@ -131,7 +131,7 @@
             <a href="loginPage.php">Login</a>
         </div>
     </div>
-</footer>
+    </footer>
 
 
 </body>
