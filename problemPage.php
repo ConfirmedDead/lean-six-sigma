@@ -48,7 +48,7 @@
 
     <!-- Post a Problem Intro -->
     <section class="post-intro">
-        <h2>🛠 Post a Problem</h2>
+        <h2>🛠 Post a Problem 🛠</h2>
         <p>
             Welcome to the heart of <strong>Jogablogwen Code Recovery</strong> — where problems meet solutions.
         </p>
@@ -66,7 +66,7 @@
             <a href="http://localhost/Lean-Six-Sigma/postProblemPage.php">
                 <button>Click Here!</button>
             </a>
-    </div>
+        </div>
 
     </section>
 
