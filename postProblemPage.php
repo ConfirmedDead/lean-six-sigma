@@ -13,7 +13,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $db->open();
 
         // Prepare the SQL query to insert the problem
-        $stmt = $db->conn->prepare("INSERT INTO problems (problem_description) VALUES (?)");
+        $stmt = $db->conn->prepare("INSERT INTO problems (description) VALUES (?)");
         $stmt->bind_param("s", $problem);
 
         // Execute the query and check for success

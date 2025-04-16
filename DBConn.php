@@ -2,12 +2,12 @@
 <?php
 class DBConn {
     public $conn;
-
+    
     // Open a database connection
     public function open() {
         $host = "localhost"; // Database host
         $username = "root";  // Database username
-        $password = "password";      // Database password
+        $password = "password"; // Database password
         $dbname = "jogablogwen-code-recovery"; // Database name
 
         // Create connection
@@ -26,4 +26,5 @@ class DBConn {
         }
     }
 }
+
 ?>
