@@ -76,8 +76,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     </script>
 
     <!-- Welcome -->
-        <h1 class="problem-page">Post Your Problem Here</h1>
-        <form method="POST" action="postProblemPage.php">
     <h1 class="problem-page">Post Your Problem Here</h1>
     <textarea name="problem" rows="10" cols="50"></textarea>
     <br>
