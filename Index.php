@@ -76,7 +76,7 @@
         </h5>
         
         <h5> 
-            Got a coding issue? Post your question and let the community help you recover your code!
+            Got a coding issue? Post your question and let the community help you fix your code!
         </h5>
     </div>
 
@@ -114,7 +114,7 @@
     </div>
 
     <div class = "buttonHolder">
-        <h3> Dont Have a account?</h3>
+        <h3> Dont Have an account?</h3>
         <a href="http://localhost/Lean-Six-Sigma/signupPage.php">
         <button>Signup</button>
         </a>
