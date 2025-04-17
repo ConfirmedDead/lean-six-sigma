@@ -14,7 +14,7 @@
     <link rel="icon" type="image/x-icon" href="/images/favicon.ico">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/index.css">
-    <title>Document</title>
+    <title>Home</title>
 </head>
 
 <body>
