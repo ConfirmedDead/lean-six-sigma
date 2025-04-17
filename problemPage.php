@@ -29,7 +29,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['comment'], $_POST['pr
     <title>Problems</title>
 </head>
 <body>
-    <!-- Existing content -->
+    <!-- navbar -->
+    <header class="main-header">
+        <div class="logo">
+            <h1>Jogablogwen <span>Code Recovery</span></h1>
+            <p class="tagline">Restoring code. Rebuilding confidence.</p>
+        </div>
+        <nav class="navbar">
+            <ul>
+                <li><a href="index.php">Home</a></li>
+                <li><a href="postProblemPage.php">Got A Problem</a></li> 
+                <li><a href="signupPage.php">Signup</a></li>
+                <li><a href="loginPage.php">Login</a></li>
+            </ul>
+        </nav>
+    </header>
 
     <!-- Problems Section -->
     <section class="problems-section">
@@ -65,10 +79,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['comment'], $_POST['pr
     </section>
 
     <!-- Footer -->
-    <footer class="footer">
-        <div class="footer-content">
-            <p>&copy; 2025 Jogablogwen Code Recovery. All rights reserved.</p>
+       <!-- footer -->
+       <footer class="footer">
+    <div class="footer-content">
+        <p>&copy; 2025 Jogablogwen Code Recovery. All rights reserved.</p>
+        <div class="footer-links">
+            <a href="index.php">Home</a>
+            <a href="postProblemPage.php">Got A Problem</a>
+            <a href="signupPage.php">Signup</a>
+            <a href="loginPage.php">Login</a>
         </div>
+    </div>
     </footer>
 </body>
 </html>

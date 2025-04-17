@@ -72,7 +72,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <li><a href="index.php">Home</a></li>
                 <li><a href="problemPage.php">Problem</a></li>
                 <li><a href="signupPage.php">Signup</a></li>
-                <li><a href="loginPage.php">Login</a></li>
+                <li><a href="postProblemPage.php">Got A Problem</a></li> 
             </ul>
         </nav>
     </header>
@@ -125,7 +125,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <a href="index.php">Home</a>
                 <a href="problemPage.php">Problem</a>
                 <a href="signupPage.php">Signup</a>
-                <a href="loginPage.php">Login</a>
+                <a href="postProblemPage.php">Got A Problem</a>
             </div>
         </div>
     </footer>

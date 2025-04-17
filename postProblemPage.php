@@ -86,18 +86,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <input type="submit" name="submit" value="Submit">
 </form>
         
-    <!-- footer -->
-    <footer class="footer">
-        <div class="footer-content">
-            <p>&copy; 2025 Jogablogwen Code Recovery. All rights reserved.</p>
-            <div class="footer-links">
-                <a href="index.php">Home</a>
-                <a href="problemPage.php">Problem</a>
-                <a href="signupPage.php">Signup</a>
-                <a href="loginPage.php">Login</a>
-            </div>
+        <!-- footer -->
+        <footer class="footer">
+    <div class="footer-content">
+        <p>&copy; 2025 Jogablogwen Code Recovery. All rights reserved.</p>
+        <div class="footer-links">
+            <a href="index.php">Home</a>
+            <a href="problemPage.php">Problem</a>
+            <a href="signupPage.php">Signup</a>
+            <a href="loginPage.php">Login</a>
         </div>
-    
+    </div>
     </footer>
 </body>
 </html>

@@ -26,7 +26,7 @@
         </div>
         <nav class="navbar">
             <ul>
-                <li><a href="index.php">Home</a></li>
+                <li><a href="postProblemPage.php">Got A Problem</a></li> 
                 <li><a href="problemPage.php">Problem</a></li>
                 <li><a href="signupPage.php">Signup</a></li>
                 <li><a href="loginPage.php">Login</a></li>
@@ -125,7 +125,7 @@
     <div class="footer-content">
         <p>&copy; 2025 Jogablogwen Code Recovery. All rights reserved.</p>
         <div class="footer-links">
-            <a href="index.php">Home</a>
+            <a href="postProblemPage.php">Got A Problem</a>
             <a href="problemPage.php">Problem</a>
             <a href="signupPage.php">Signup</a>
             <a href="loginPage.php">Login</a>
