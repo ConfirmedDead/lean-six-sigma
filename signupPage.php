@@ -65,27 +65,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             </ul>
         </nav>
     </header>
-<!-- Signup Form -->
-<div style="width:100%;text-align:center;">
-        <h1>Sign Up</h1><br>
-        <form method="POST" action="signupPage.php">
-            <label for="username">Username:</label>
-            <input type="text" id="username" name="username" required><br><br>
-            <label for="password">Password:</label>
-            <input type="password" id="password" name="password" required><br><br>
-            <label for="confirm_password">Confirm Password:</label>
-            <input type="password" id="confirm_password" name="confirm_password" required><br><br>
-            <button type="submit">Sign Up</button>
-        </form>
 
-        <?php if (isset($error)): ?>
-            <p style="color: red;"><?php echo $error; ?></p>
-        <?php endif; ?>
-
-        <?php if (isset($success)): ?>
-            <p style="color: green;"><?php echo $success; ?></p>
-        <?php endif; ?>
-    </div>
 
     <!-- script to make nav bar reactive -->
     <script>
@@ -105,8 +85,53 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         };
     </script>
 
+    
+
+    <!-- Signup Form -->
+    <div class="signupbox">
+        <h2>Create Your Account</h2>
+        <form method="POST" action="signupPage.php">
+            <label for="username">Username</label>
+            <input type="text" id="username" name="username" required>
+
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password" required>
+
+            <label for="confirm_password">Confirm Password</label>
+            <input type="password" id="confirm_password" name="confirm_password" required>
+
+            <div class="toggle-password">
+                <input type="checkbox" id="showPasswords" onclick="togglePasswords()">
+                <label for="showPasswords">Show Passwords</label>
+            </div>
+
+            <button type="submit">Sign Up</button>
+
+            <?php if (isset($error)): ?>
+                <p class="error-message"><?php echo $error; ?></p>
+            <?php endif; ?>
+
+            <?php if (isset($success)): ?>
+                <p class="success-message"><?php echo $success; ?></p>
+            <?php endif; ?>
+        </form>
+        
+    </div>
+    
+    <!-- script to hide and show password -->
+    <script>
+    function togglePasswords() {
+        const password = document.getElementById("password");
+        const confirm = document.getElementById("confirm_password");
+
+        const type = password.type === "password" ? "text" : "password";
+        password.type = type;
+        confirm.type = type;
+    }
+    </script>
 
 
+   
 
 
 

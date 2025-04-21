@@ -76,23 +76,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             </ul>
         </nav>
     </header>
-
-       <!-- Login Form -->
-       <div style="width:100%;text-align:center;">
-        <h1>Log In</h1><br>
-        <form method="POST" action="loginPage.php">
-            <label for="username">Username:</label>
-            <input type="text" id="username" name="username" required><br><br>
-            <label for="password">Password:</label>
-            <input type="password" id="password" name="password" required><br><br>
-            <button type="submit">Login</button>
-        </form>
-
-        <?php if (isset($error)): ?>
-            <p style="color: red;"><?php echo $error; ?></p>
-        <?php endif; ?>
-    </div>
-
+        
+      
     <!-- script to make nav bar reactive -->
     <script>
         let prevScrollPos = window.pageYOffset;
@@ -110,11 +95,37 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             prevScrollPos = currentScrollPos;
         };
     </script>
+    <!-- script to hide and show password -->
+    <script>
+        function togglePassword() {
+            const passwordField = document.getElementById("password");
+            passwordField.type = passwordField.type === "password" ? "text" : "password";
+        }
+    </script>
+
+    <div class="loginbox">
+        <h1 class="login-title">Welcome Back</h1>
+        <form method="POST" action="loginPage.php">
+            <label for="username">Username</label>
+            <input type="text" id="username" name="username" required>
+
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password" required>
+
+            <div class="toggle-password">
+                <input type="checkbox" id="showPass" onclick="togglePassword()">
+                <label for="showPass">Show Password</label>
+            </div>
+
+            <button type="submit">Login</button>
+        </form>
+
+        <?php if (isset($error)): ?>
+            <p class="error"><?php echo $error; ?></p>
+        <?php endif; ?>
+    </div>
 
 
-<div style="width:100%;text-align:center;">
-    <h1>Log In</h1><br>
-</div>
 
 
 <!-- footer -->

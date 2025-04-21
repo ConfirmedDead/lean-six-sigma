@@ -229,3 +229,166 @@ body {
     color: rgba(128, 0, 128, 0.993);
     text-align: center;
 }
+
+/* Log in*/
+.loginbox {
+    background-color: #0E213F;
+    color: #F4F4F4;
+    padding: 40px 30px;
+    border-radius: 10px;
+    margin: 150px auto;
+    max-width: 800px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+.login-title {
+    text-align: center;
+    font-size: 32px;
+    margin-bottom: 30px;
+    color: #1CD8D2;
+}
+
+.loginbox label {
+    display: block;
+    margin-top: 15px;
+    font-weight: bold;
+    color: #D6EAF8;
+}
+
+.loginbox input[type="text"],
+.loginbox input[type="password"] {
+    width: 100%;
+    padding: 12px;
+    margin-top: 5px;
+    background-color: #1a2b4c;
+    border: 1px solid #1CD8D2;
+    border-radius: 6px;
+    color: #F4F4F4;
+    font-size: 16px;
+    transition: border 0.3s ease;
+}
+
+.loginbox input[type="text"]:focus,
+.loginbox input[type="password"]:focus {
+    outline: none;
+    border-color: #38B6FF;
+    background-color: #213559;
+}
+
+.loginbox button {
+    width: 100%;
+    padding: 12px;
+    margin-top: 25px;
+    background: #1CD8D2;
+    border: none;
+    color: #0B1B36;
+    font-weight: bold;
+    font-size: 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.loginbox button:hover {
+    background-color: #38B6FF;
+}
+
+.toggle-password {
+    margin-top: 15px;
+    font-size: 14px;
+    color: #ccc;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.error {
+    color: #FF6B6B;
+    margin-top: 20px;
+    font-weight: bold;
+    text-align: center;
+}
+/* Sign up*/
+.toggle-password {
+    margin-top: 15px;
+    font-size: 14px;
+    color: #ccc;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.signupbox {
+    background-color: #0E213F;
+    color: #F4F4F4;
+    padding: 40px 30px;
+    border-radius: 10px;
+    margin: 150px auto;
+    max-width: 800px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+.signupbox h2 {
+    color: #1CD8D2;
+    text-align: center;
+    margin-bottom: 25px;
+    font-size: 28px;
+}
+
+.signupbox label {
+    display: block;
+    margin: 15px 0 5px;
+    font-weight: bold;
+    color: #D6EAF8;
+}
+
+.signupbox input[type="text"],
+.signupbox input[type="password"] {
+    width: 100%;
+    padding: 10px 12px;
+    border-radius: 6px;
+    border: 1px solid #1CD8D2;
+    background-color: #0B1B36;
+    color: #F4F4F4;
+    font-size: 16px;
+    transition: border-color 0.3s;
+}
+
+.signupbox input[type="text"]:focus,
+.signupbox input[type="password"]:focus {
+    outline: none;
+    border-color: #38B6FF;
+    box-shadow: 0 0 5px #38B6FF;
+}
+
+.signupbox button {
+    width: 100%;
+    margin-top: 25px;
+    background-color: #1CD8D2;
+    color: #0B1B36;
+    padding: 12px;
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.signupbox button:hover {
+    background-color: #38B6FF;
+}
+
+.error-message {
+    margin-top: 15px;
+    color: #FF6B6B;
+    font-weight: bold;
+    text-align: center;
+}
+
+.success-message {
+    margin-top: 15px;
+    color: #00FFAA;
+    font-weight: bold;
+    text-align: center;
+}
