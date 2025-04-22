@@ -45,7 +45,23 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['comment'], $_POST['pr
             </ul>
         </nav>
     </header>
+     <!-- script to make nav bar reactive -->
+     <script>
+        let prevScrollPos = window.pageYOffset;
+        const header = document.querySelector(".main-header");
 
+        window.onscroll = function () {
+            let currentScrollPos = window.pageYOffset;
+
+            if (prevScrollPos > currentScrollPos) {
+            header.style.top = "0";
+            } else {
+            header.style.top = "-100px"; // Adjust based on header height
+            }
+
+            prevScrollPos = currentScrollPos;
+        };
+    </script>
         <!-- Post a Problem Intro -->
     <section class="post-intro">
         <h2>🛠 Post a Problem 🛠</h2>
