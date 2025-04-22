@@ -59,7 +59,6 @@ body {
 .buttonHolder {
     text-align: center;
     padding: 30px;
-    background-color: #0B1B36;
 }
 
 .buttonHolder h5 {
@@ -228,6 +227,7 @@ body {
 .problem-page {
     color: rgba(128, 0, 128, 0.993);
     text-align: center;
+    margin-top: 150px;
 }
 
 /* Log in*/
