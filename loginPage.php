@@ -124,7 +124,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <?php if (isset($error)): ?>
             <p class="error"><?php echo $error; ?></p>
         <?php endif; ?>
+        <h3 class = "loginTag">Dont already have an account? <a href="http://localhost/Lean-Six-Sigma/signupPage.php">Click here to Sign Up.</a></h3>
     </div>
+  
 
 
 
