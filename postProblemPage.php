@@ -3,11 +3,14 @@
 require_once 'DBConn.php';
 
     //makes it so you must be logged in to be on this page
+   
+    session_start();
+
     if(!isset($_SESSION['user_id'])){
         header("Location: loginPage.php");
-    }else{
-        $user->populate($_SESSION['user_id']); 
+        exit(); // VERY important after header redirect
     }
+
 
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
