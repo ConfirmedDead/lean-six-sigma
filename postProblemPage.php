@@ -77,12 +77,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     </script>
 
     <!-- Welcome -->
+    <form method="POST" action="postProblemPage.php">
     <h1 class="problem-page">Post Your Problem Here</h1>
     <textarea name="problem" rows="10" cols="50"></textarea>
     <br>
     <input type="submit" name="submit" value="Submit">
-</form>
-        
+    </form>
         <!-- footer -->
         <footer class="footer">
     <div class="footer-content">
