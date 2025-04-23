@@ -6,6 +6,9 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
+
+
+
 // Fetch problems from the database
 $problemsQuery = "SELECT * FROM problems ORDER BY created_at DESC";
 $problemsResult = $conn->query($problemsQuery);

@@ -116,7 +116,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <p class="success-message"><?php echo $success; ?></p>
             <?php endif; ?>
         </form>
-        
+        <h3 class = "loginTag">Already have an account? <a href="http://localhost/Lean-Six-Sigma/loginPage.php">Click here to Login.</a></h3>
     </div>
     
     <!-- script to hide and show password -->

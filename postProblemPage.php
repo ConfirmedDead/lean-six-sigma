@@ -2,6 +2,14 @@
 // Include your database connection class
 require_once 'DBConn.php';
 
+    //makes it so you must be logged in to be on this page
+    if(!isset($_SESSION['user_id'])){
+        header("Location: loginPage.php");
+    }else{
+        $user->populate($_SESSION['user_id']); 
+    }
+
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Retrieve the problem from the form
     $problem = $_POST['problem'];

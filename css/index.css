@@ -394,3 +394,6 @@ body {
     font-weight: bold;
     text-align: center;
 }
+.loginTag a{
+    color: inherit;
+}
