@@ -1,8 +1,10 @@
 <?php
     session_start();
+    
     require_once('User.php');
     $user = new User(); 
-
+    
+    
     if(!isset($_SESSION['user_id'])){
         header("Location: loginPage.php");
         exit(); // VERY important after header redirect
@@ -46,15 +48,11 @@
         </div>
         <nav class="navbar">
             <ul>
-            <li><a href="postProblemPage.php">Got A Problem</a></li>
+                <li><a href="index.php">Home</a></li>
                 <li><a href="problemPage.php">Problem</a></li>
-                <?php if (!$isLoggedIn): // Show these links only if the user is not logged in ?>
-                    <li><a href="signupPage.php">Signup</a></li>
-                    <li><a href="loginPage.php">Login</a></li>
-                <?php else: // Show a logout link if the user is logged in ?>
-                    <li><a href="logout.php">Logout</a></li>
-                    <li><a href="profile.php">Profile</a></li>
-                <?php endif; ?>
+                <li><a href="postProblemPage.php">Post a problem?</a></li>
+                <li><a href="profile.php">Profile</a></li>
+                <li><a href="logout.php">Logout</a></li>
             </ul>
         </nav>
     </header>

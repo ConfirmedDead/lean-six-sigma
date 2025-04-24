@@ -1,6 +1,9 @@
 <?php
+session_start();
+
 // Include your database connection class
 require_once 'DBConn.php';
+
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Retrieve form data
@@ -51,8 +54,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <link rel="icon" type="image/x-icon" href="images/favicon.ico">
 </head>
 <body>
-     <!-- navbar -->
-     <header class="main-header">
+    <!-- navbar -->
+    <header class="main-header">
         <div class="logo">
             <h1>Jogablogwen <span>Code Recovery</span></h1>
             <p class="tagline">Restoring code. Rebuilding confidence.</p>
@@ -61,11 +64,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <ul>
                 <li><a href="index.php">Home</a></li>
                 <li><a href="problemPage.php">Problem</a></li>
-                <li><a href="postProblemPage.php">Got A Problem</a></li> 
+                <li><a href="signupPage.php">Signup</a></li>
                 <li><a href="loginPage.php">Login</a></li>
             </ul>
         </nav>
     </header>
+
 
 
     <!-- script to make nav bar reactive -->

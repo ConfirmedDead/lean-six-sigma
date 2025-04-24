@@ -53,8 +53,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <title>Post Problems | Jogablogwen Code Recovery</title>
 </head>
 <body>
-     <!-- navbar -->
-     <header class="main-header">
+    <!-- navbar -->
+    <header class="main-header">
         <div class="logo">
             <h1>Jogablogwen <span>Code Recovery</span></h1>
             <p class="tagline">Restoring code. Rebuilding confidence.</p>
@@ -63,8 +63,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <ul>
                 <li><a href="index.php">Home</a></li>
                 <li><a href="problemPage.php">Problem</a></li>
-                <li><a href="signupPage.php">Signup</a></li>
-                <li><a href="loginPage.php">Login</a></li>
+                <li><a href="postProblemPage.php">Post a problem?</a></li>
+                <li><a href="profile.php">Profile</a></li>
+                <li><a href="logout.php">Logout</a></li>
             </ul>
         </nav>
     </header>
