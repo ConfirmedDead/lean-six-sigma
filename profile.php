@@ -46,7 +46,8 @@
 <a href="profile.php?action=logout" class="empty"><button> Logout </button></a> 
 <a href="profile.php?action=update" class="empty"><button> Update User </button></a> 
 <a href="profile.php?action=delete" class="empty"><button> Delete Account </button></a> 
-
+<a href="index.php"><button>Home</button></a>
+<a href="postProblemPage.php"><button>Post Problem</button></a>
 
 </body>
 </html>

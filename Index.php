@@ -1,8 +1,8 @@
 <?php
+session_start(); // Start the session to track login status
 
-
-
-
+// Example: Check if the user is logged in
+$isLoggedIn = isset($_SESSION['user_id']); // Assuming 'user_id' is set in the session when logged in
 ?>
 
 
@@ -26,10 +26,15 @@
         </div>
         <nav class="navbar">
             <ul>
-                <li><a href="postProblemPage.php">Got A Problem</a></li> 
+            <li><a href="postProblemPage.php">Got A Problem</a></li>
                 <li><a href="problemPage.php">Problem</a></li>
-                <li><a href="signupPage.php">Signup</a></li>
-                <li><a href="loginPage.php">Login</a></li>
+                <?php if (!$isLoggedIn): // Show these links only if the user is not logged in ?>
+                    <li><a href="signupPage.php">Signup</a></li>
+                    <li><a href="loginPage.php">Login</a></li>
+                <?php else: // Show a logout link if the user is logged in ?>
+                    <li><a href="logout.php">Logout</a></li>
+                    <li><a href="profile.php">Profile</a></li>
+                <?php endif; ?>
             </ul>
         </nav>
     </header>

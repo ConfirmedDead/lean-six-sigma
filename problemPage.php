@@ -1,6 +1,6 @@
 <?php
 // Database connection
-$conn = new mysqli("localhost", "root", "password", "jogablogwen-code-recovery");
+$conn = new mysqli("localhost", "cruser", "password", "jogablogwen-code-recovery");
 
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
