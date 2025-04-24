@@ -5,8 +5,8 @@ class DBConn {
     
     // Open a database connection
     public function open() {
-        $host = "localhost"; // Database host
-        $username = "root";  // Database username
+        $host = "10.4.52.67"; // Database host
+        $username = "cruser";  // Database username
         $password = "password"; // Database password
         $dbname = "jogablogwen-code-recovery"; // Database name
 
