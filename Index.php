@@ -133,8 +133,13 @@ $isLoggedIn = isset($_SESSION['user_id']); // Assuming 'user_id' is set in the s
         <div class="footer-links">
             <a href="postProblemPage.php">Got A Problem</a>
             <a href="problemPage.php">Problem</a>
-            <a href="signupPage.php">Signup</a>
-            <a href="loginPage.php">Login</a>
+            <?php if (!$isLoggedIn): // Show these links only if the user is not logged in ?>
+                <a href="signupPage.php">Signup</a>
+                <a href="loginPage.php">Login</a>
+            <?php else: // Show a logout link if the user is logged in ?>
+                <a href="logout.php">Logout</a>
+                <a href="profile.php">Profile</a>
+            <?php endif; ?>
         </div>
     </div>
     </footer>
