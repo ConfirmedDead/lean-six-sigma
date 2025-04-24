@@ -14,7 +14,7 @@
     <link rel="icon" type="image/x-icon" href="images/favicon.ico">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/index.css">
-    <title>Home</title>
+    <title>Home | Jogablogwen Code Recovery</title>
 </head>
 
 <body>

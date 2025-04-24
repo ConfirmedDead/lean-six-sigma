@@ -30,7 +30,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['comment'], $_POST['pr
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/index.css">
     <link rel="icon" type="image/x-icon" href="images/favicon.ico">
-    <title>Problems</title>
+    <title>Problems | Jogablogwen Code Recovery</title>
 </head>
 <body>
     <!-- navbar -->
