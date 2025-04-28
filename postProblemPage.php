@@ -2,22 +2,21 @@
 // Include your database connection class
 require_once 'DBConn.php';
 
-    //makes it so you must be logged in to be on this page
-   
-    session_start();
-    // Example: Check if the user is logged in
-    $isLoggedIn = isset($_SESSION['user_id']); // Assuming 'user_id' is set in the session when logged in
-    
-    if(!isset($_SESSION['user_id'])){
-        header("Location: loginPage.php");
-        exit(); // VERY important after header redirect
-    }
+// Makes it so you must be logged in to be on this page
+session_start();
 
+// Example: Check if the user is logged in
+$isLoggedIn = isset($_SESSION['user_id']); // Assuming 'user_id' is set in the session when logged in
 
+if (!$isLoggedIn) {
+    header("Location: loginPage.php");
+    exit(); // VERY important after header redirect
+}
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Retrieve the problem from the form
     $problem = $_POST['problem'];
+    $userId = $_SESSION['user_id']; // Get the logged-in user's ID
 
     // Check if the problem is not empty
     if (!empty($problem)) {
@@ -25,22 +24,22 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $db = new DBConn();
         $db->open();
 
-        // Prepare the SQL query to insert the problem
-        $stmt = $db->conn->prepare("INSERT INTO problems (description) VALUES (?)");
-        $stmt->bind_param("s", $problem);
+        // Prepare the SQL query to insert the problem with the user_id
+        $stmt = $db->conn->prepare("INSERT INTO problems (description, user_id) VALUES (?, ?)");
+        $stmt->bind_param("si", $problem, $userId);
 
         // Execute the query and check for success
         if ($stmt->execute()) {
             echo "<p>Problem posted successfully!</p>";
         } else {
-            echo "<p>Error: " . $stmt->error . "</p>";
+            echo "<p>Failed to post the problem. Please try again.</p>";
         }
 
-        // Close the statement and connection
+        // Close the statement and database connection
         $stmt->close();
         $db->close();
     } else {
-        echo "<p>Please enter your problem.</p>";
+        echo "<p>Please enter a problem description.</p>";
     }
 }
 ?>

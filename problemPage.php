@@ -1,12 +1,19 @@
 <?php
-session_start();
-// Database connection
-$conn = new mysqli("10.4.52.67", "cruser", "password", "jogablogwen-code-recovery");
-
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
+session_start(); // Start the session
+// Include your database connection class
+require_once 'DBConn.php';
+// Include your User class
+require_once 'User.php';
+// Check if the user is logged in
+if (!isset($_SESSION['user_id'])) {
+    header("Location: loginPage.php");
+    exit(); // VERY important after header redirect
 }
-$isLoggedIn = isset($_SESSION['user_id']); // Assuming 'user_id' is set in the session when logged in
+// Create a new database connection
+$db = new DBConn();
+$db->open();
+$conn = $db->conn;
+
 
 // Fetch problems from the database
 $problemsQuery = "SELECT * FROM problems ORDER BY created_at DESC";
@@ -17,6 +24,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['comment'], $_POST['pr
     $problemId = intval($_POST['problem_id']);
     $comment = $conn->real_escape_string($_POST['comment']);
     $conn->query("INSERT INTO comments (problem_id, comment) VALUES ($problemId, '$comment')");
+    header("Location: problemPage.php");
+    exit;
+}
+
+// Handle problem deletion
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['delete_problem_id'])) {
+    $problemId = intval($_POST['delete_problem_id']);
+    $userId = $_SESSION['user_id']; // Assuming 'user_id' is stored in the session
+    // Ensure the logged-in user is the owner of the post
+    $deleteQuery = "DELETE FROM problems WHERE id = $problemId AND user_id = $userId";
+    $conn->query($deleteQuery);
     header("Location: problemPage.php");
     exit;
 }
@@ -91,15 +109,14 @@ $isLoggedIn = isset($_SESSION['user_id']); // Assuming 'user_id' is set in the s
         </p>
 
 
-         <!-- Problems Section -->
-        <section class="problems-section">
-            <h2>Community Problems</h2>
-            <?php if ($problemsResult->num_rows > 0): ?>
-                <?php while ($problem = $problemsResult->fetch_assoc()): ?>
-                    <div class="problem">
-                        
-                        <p><?php echo nl2br(htmlspecialchars($problem['description'])); ?></p>
-                        <h4>Comments:</h4>
+          <!-- Problems Section -->
+    <section class="problems-section">
+        <h2>Community Problems</h2>
+        <?php if ($problemsResult->num_rows > 0): ?>
+            <?php while ($problem = $problemsResult->fetch_assoc()): ?>
+                <div class="problem">
+                    <p><?php echo nl2br(htmlspecialchars($problem['description'])); ?></p>
+                    <h4>Comments:</h4>
                         <ul>
                             <?php
                             $commentsQuery = "SELECT * FROM comments WHERE problem_id = " . $problem['id'];
@@ -117,11 +134,20 @@ $isLoggedIn = isset($_SESSION['user_id']); // Assuming 'user_id' is set in the s
                             <textarea name="comment" placeholder="Write a comment..." required></textarea>
                             <button type="submit">Post Comment</button>
                         </form>
-                    </div>
-                <?php endwhile; ?>
-            <?php else: ?>
-                <p>No problems posted yet.</p>
-            <?php endif; ?>
+
+                    <!-- Delete Problem Button (Visible only to the owner) -->
+                    <?php if ($isLoggedIn && $problem['user_id'] == $_SESSION['user_id']): ?>
+                        <form method="POST" action="">
+                            <input type="hidden" name="delete_problem_id" value="<?php echo $problem['id']; ?>">
+                            <button type="submit" class="delete-button">Delete Post</button>
+                        </form>
+                    <?php endif; ?>
+                </div>
+            <?php endwhile; ?>
+        <?php else: ?>
+            <p>No problems have been posted yet.</p>
+        <?php endif; ?>
+
         </section>
 
                
