@@ -65,7 +65,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <ul>
                 <li><a href="index.php">Home</a></li>
                 <li><a href="problemPage.php">Problem</a></li>
-                <li><a href="postProblemPage.php">Post a Problem?</a></li>
+                <li><a href="postProblemPage.php">Post a Problem</a></li>
                 <li><a href="profile.php">Profile</a></li>
                 <li><a href="logout.php">Logout</a></li>
             </ul>
@@ -109,17 +109,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         </form>
     </div>
 
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="footer-content">
-            <p>&copy; 2025 Jogablogwen Code Recovery. All rights reserved.</p>
-            <div class="footer-links">
-                <a href="index.php">Home</a>
-                <a href="problemPage.php">Problem</a>
-                <a href="signupPage.php">Signup</a>
-                <a href="loginPage.php">Login</a>
-            </div>
+  <!-- footer -->
+ <footer class="footer">
+    <div class="footer-content">
+        <p>&copy; 2025 Jogablogwen Code Recovery. All rights reserved.</p>
+        <div class="footer-links">
+            <a href="index.php">Home</a>
+            <a href="problemPage.php">Problem</a>
+                <a href="profile.php">Profile</a>
+                <a href="postProblemPage.php">Post a Problem</a>
         </div>
+    </div>
     </footer>
 </body>
 </html>
