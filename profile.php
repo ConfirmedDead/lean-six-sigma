@@ -99,17 +99,22 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
         </form>
     </div>
 
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="footer-content">
-            <p>&copy; 2025 Jogablogwen Code Recovery. All rights reserved.</p>
-            <div class="footer-links">
-                <a href="postProblemPage.php">Got A Problem</a>
-                <a href="problemPage.php">Problem</a>
+   <!-- footer -->
+   <footer class="footer">
+    <div class="footer-content">
+        <p>&copy; 2025 Jogablogwen Code Recovery. All rights reserved.</p>
+        <div class="footer-links">
+            <a href="index.php">Home</a>
+            <a href="problemPage.php">Problem</a>
+            <?php if (!$isLoggedIn): // Show these links only if the user is not logged in ?>
                 <a href="signupPage.php">Signup</a>
                 <a href="loginPage.php">Login</a>
-            </div>
+            <?php else: // Show a logout link if the user is logged in ?>
+                <a href="profile.php">Profile</a>
+                <a href="postProblemPage.php">Got A Problem</a>
+            <?php endif; ?>
         </div>
+    </div>
     </footer>
 </body>
 </html>

@@ -97,14 +97,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <input type="submit" name="submit" value="Submit">
     </form>
         <!-- footer -->
-        <footer class="footer">
+    <footer class="footer">
     <div class="footer-content">
         <p>&copy; 2025 Jogablogwen Code Recovery. All rights reserved.</p>
         <div class="footer-links">
             <a href="index.php">Home</a>
             <a href="problemPage.php">Problem</a>
-            <a href="signupPage.php">Signup</a>
-            <a href="loginPage.php">Login</a>
+            <?php if (!$isLoggedIn): // Show these links only if the user is not logged in ?>
+                <a href="signupPage.php">Signup</a>
+                <a href="loginPage.php">Login</a>
+            <?php else: // Show a logout link if the user is logged in ?>
+                <a href="profile.php">Profile</a>
+                <a href="postProblemPage.php">Got A Problem</a>
+            <?php endif; ?>
         </div>
     </div>
     </footer>
