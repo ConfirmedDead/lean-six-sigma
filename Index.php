@@ -31,7 +31,7 @@ $isLoggedIn = isset($_SESSION['user_id']); // Assuming 'user_id' is set in the s
                     <li><a href="signupPage.php">Signup</a></li>
                     <li><a href="loginPage.php">Login</a></li>
                 <?php else: // Show a logout link if the user is logged in ?>
-                    <li><a href="postProblemPage.php">Post a problem?</a></li>
+                    <li><a href="postProblemPage.php">Post a Problem</a></li>
                     <li><a href="profile.php">Profile</a></li>
                     <li><a href="logout.php">Logout</a></li>
                 <?php endif; ?>

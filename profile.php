@@ -14,7 +14,7 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
         if ($_POST['action'] == "update") {
             $newUsername = trim($_POST['new_username']);
             if (!empty($newUsername)) {
-                if ($user->updateUsername($_SESSION['user_id'], $newUsername)) {
+                if ($user->update($_SESSION['user_id'], $newUsername)) {   // <<< pass $newUsername too
                     $_SESSION['username'] = $newUsername;
                     $success = "Username updated successfully!";
                 } else {
@@ -24,7 +24,7 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
                 $error = "Username cannot be empty.";
             }
         } else if ($_POST['action'] == "delete") {
-            if ($user->deleteAccount($_SESSION['user_id'])) {
+            if (User::delete($_SESSION['user_id'])) {  // <<< static call (User::delete)
                 $_SESSION = array();
                 session_destroy();
                 header("Location: signupPage.php");
@@ -35,6 +35,7 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
         }
     }
 }
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -59,7 +60,7 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
                 <li><a href="problemPage.php">Problem</a></li>
                 <li><a href="postProblemPage.php">Post a Problem</a></li>
                 <li><a href="profile.php">Profile</a></li>
-                <li><a href="profile.php?action=logout">Logout</a></li>
+                <li><a href="logout.php">Logout</a></li>
             </ul>
         </nav>
     </header>

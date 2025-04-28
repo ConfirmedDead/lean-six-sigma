@@ -40,14 +40,25 @@
         }
 
 
-        public static function delete($pId){
-            $userId = 0; 
-            $sql = "DELETE FROM `jogablogwen-code-recovery`.users where id=".$pId;
+        public static function delete($pId) {
             $dbconn = new DBConn();
-            $dbconn->open();   
-            $dbconn->conn->query($sql);
+            $dbconn->open();
+            
+            // Using prepared statement
+            $stmt = $dbconn->conn->prepare("DELETE FROM `jogablogwen-code-recovery`.users WHERE id = ?");
+            if (!$stmt) {
+                $dbconn->close();
+                return false; // failed to prepare
+            }
+        
+            $stmt->bind_param("i", $pId);
+            $success = $stmt->execute();  // returns true/false
+            $stmt->close();
             $dbconn->close();
+        
+            return $success; // <<< Return true if delete successful, false otherwise
         }
+        
 
         public function insert(){
             $affected_rows = 0; 
@@ -64,20 +75,17 @@
             $dbconn->close();
             return $affected_rows;
         }
-   
-        public function update(){
-            $affected_rows = 0; 
+        public function update($userId, $newUsername) {
             $dbconn = new DBConn();
-            $dbconn->open(); 
-            if(!$dbconn->conn->connect_errno){
-                $sql = "UPDATE `jogablogwen-code-recovery`.users SET username='{$this->username}',WHERE id ='{$this->id}';";
-                if ($dbconn->conn->query($sql)) {
-                    $affected_rows = $dbconn->conn->affected_rows; 
-                } 
-            }
+            $dbconn->open();
+            $stmt = $dbconn->conn->prepare("UPDATE `jogablogwen-code-recovery`.users SET username = ? WHERE id = ?");
+            $stmt->bind_param("si", $newUsername, $userId);
+            $success = $stmt->execute();
+            $stmt->close();
             $dbconn->close();
-            return $affected_rows;
+            return $success;
         }
+        
     }
 
 ?>
