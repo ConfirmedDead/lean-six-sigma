@@ -397,3 +397,73 @@ body {
 .loginTag a{
     color: inherit;
 }
+
+/* Profile Page*/
+
+.profile-container {
+    background-color: #0E213F;
+    color: #F4F4F4;
+    padding: 50px 30px;
+    margin: 140px auto 50px;
+    max-width: 600px;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0 0 15px #1CD8D2;
+}
+
+.profile-container h2 {
+    margin-bottom: 20px;
+    font-size: 28px;
+}
+
+.highlight {
+    color: #1CD8D2;
+}
+
+.profile-form {
+    margin-top: 20px;
+}
+
+.profile-form input[type="text"] {
+    padding: 10px;
+    width: 80%;
+    border: 1px solid #1CD8D2;
+    border-radius: 5px;
+    margin-bottom: 15px;
+    background-color: #0B1B36;
+    color: #F4F4F4;
+}
+
+.profile-form button {
+    background-color: #1CD8D2;
+    border: none;
+    padding: 10px 25px;
+    font-size: 16px;
+    font-weight: bold;
+    color: #0B1B36;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.profile-form button:hover {
+    background-color: #38B6FF;
+}
+
+.delete-form button {
+    background-color: #d81c3f;
+}
+
+.delete-form button:hover {
+    background-color: #ff4b5c;
+}
+
+.success-message {
+    color: #1CD8D2;
+    margin-bottom: 10px;
+}
+
+.error-message {
+    color: #ff4b5c;
+    margin-bottom: 10px;
+}

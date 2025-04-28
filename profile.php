@@ -1,33 +1,40 @@
 <?php
-    session_start();
-    
-    require_once('User.php');
-    $user = new User(); 
-    
-    
-    if(!isset($_SESSION['user_id'])){
-        header("Location: loginPage.php");
-        exit(); // VERY important after header redirect
-    }
+session_start();
+require_once('User.php');
+$user = new User();
 
-    //actions
-    if($_SERVER['REQUEST_METHOD'] == "GET"){
+if (!isset($_SESSION['user_id'])) {
+    header("Location: loginPage.php");
+    exit();
+}
 
-        if(!empty($_GET['action']) && $_GET['action'] == "logout"){
-            // Clear ALL global session data.
-            $_SESSION = array();
-            // Delete session cookie
-            setcookie('PHPSESSID', '', time()-3600, '/');
-            // Destroy ALL data associated w/current session.
-            session_destroy();
-            // Redirect to login page.
-            header("Location: Index.php");
-        }else if(!empty($_GET['action']) && $_GET['action'] == "update"){
-            
-            
+// Handle actions
+if ($_SERVER['REQUEST_METHOD'] === "POST") {
+    if (!empty($_POST['action'])) {
+        if ($_POST['action'] == "update") {
+            $newUsername = trim($_POST['new_username']);
+            if (!empty($newUsername)) {
+                if ($user->updateUsername($_SESSION['user_id'], $newUsername)) {
+                    $_SESSION['username'] = $newUsername;
+                    $success = "Username updated successfully!";
+                } else {
+                    $error = "Failed to update username. Please try again.";
+                }
+            } else {
+                $error = "Username cannot be empty.";
+            }
+        } else if ($_POST['action'] == "delete") {
+            if ($user->deleteAccount($_SESSION['user_id'])) {
+                $_SESSION = array();
+                session_destroy();
+                header("Location: signupPage.php");
+                exit();
+            } else {
+                $error = "Failed to delete account. Please try again.";
+            }
         }
     }
-
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -40,7 +47,7 @@
     <link rel="stylesheet" href="css/index.css">
 </head>
 <body>
-    <!-- navbar -->
+    <!-- Navbar -->
     <header class="main-header">
         <div class="logo">
             <h1>Jogablogwen <span>Code Recovery</span></h1>
@@ -50,55 +57,58 @@
             <ul>
                 <li><a href="index.php">Home</a></li>
                 <li><a href="problemPage.php">Problem</a></li>
-                <li><a href="postProblemPage.php">Post a problem?</a></li>
+                <li><a href="postProblemPage.php">Post a Problem</a></li>
                 <li><a href="profile.php">Profile</a></li>
-                <li><a href="logout.php">Logout</a></li>
+                <li><a href="profile.php?action=logout">Logout</a></li>
             </ul>
         </nav>
     </header>
 
-
-    <!-- script to make nav bar reactive -->
     <script>
         let prevScrollPos = window.pageYOffset;
         const header = document.querySelector(".main-header");
-
         window.onscroll = function () {
             let currentScrollPos = window.pageYOffset;
-
-            if (prevScrollPos > currentScrollPos) {
-            header.style.top = "0";
-            } else {
-            header.style.top = "-100px"; // Adjust based on header height
-            }
-
+            header.style.top = (prevScrollPos > currentScrollPos) ? "0" : "-100px";
             prevScrollPos = currentScrollPos;
         };
     </script>
 
-    <div class = "usernameWelcome">
-        <h3>Welcome <?=$user->username?> </h3>
+    <div class="profile-container">
+        <h2>Welcome, <span class="highlight"><?= htmlspecialchars($_SESSION['username'] ?? $user->username) ?></span>!</h2>
 
+        <?php if (isset($success)): ?>
+            <p class="success-message"><?= htmlspecialchars($success) ?></p>
+        <?php endif; ?>
+
+        <?php if (isset($error)): ?>
+            <p class="error-message"><?= htmlspecialchars($error) ?></p>
+        <?php endif; ?>
+
+        <form method="POST" class="profile-form">
+            <input type="hidden" name="action" value="update">
+            <label for="new_username">Update Username:</label>
+            <input type="text" id="new_username" name="new_username" placeholder="Enter new username" required>
+            <button type="submit">Update Username</button>
+        </form>
+
+        <form method="POST" class="profile-form delete-form">
+            <input type="hidden" name="action" value="delete">
+            <button type="submit" onclick="return confirm('Are you sure you want to delete your account?');">Delete Account</button>
+        </form>
     </div>
 
-
-
-<a href="profile.php?action=logout" class="empty"><button> Logout </button></a> 
-<a href="profile.php?action=update" class="empty"><button> Update User </button></a> 
-<a href="profile.php?action=delete" class="empty"><button> Delete Account </button></a> 
-<a href="index.php"><button>Home</button></a>
-<a href="postProblemPage.php"><button>Post Problem</button></a>
-<!-- footer -->
-<footer class="footer">
-    <div class="footer-content">
-        <p>&copy; 2025 Jogablogwen Code Recovery. All rights reserved.</p>
-        <div class="footer-links">
-            <a href="postProblemPage.php">Got A Problem</a>
-            <a href="problemPage.php">Problem</a>
-            <a href="signupPage.php">Signup</a>
-            <a href="loginPage.php">Login</a>
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <p>&copy; 2025 Jogablogwen Code Recovery. All rights reserved.</p>
+            <div class="footer-links">
+                <a href="postProblemPage.php">Got A Problem</a>
+                <a href="problemPage.php">Problem</a>
+                <a href="signupPage.php">Signup</a>
+                <a href="loginPage.php">Login</a>
+            </div>
         </div>
-    </div>
     </footer>
 </body>
 </html>

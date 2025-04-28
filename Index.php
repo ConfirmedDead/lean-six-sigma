@@ -119,12 +119,22 @@ $isLoggedIn = isset($_SESSION['user_id']); // Assuming 'user_id' is set in the s
 
     </div>
 
-    <div class = "buttonHolder">
-        <h3> Dont Have an account?</h3>
-        <a href="http://localhost/Lean-Six-Sigma/signupPage.php">
-        <button>Signup</button>
-        </a>
-    </div>
+    
+            <?php if (!$isLoggedIn): // Show these links only if the user is not logged in ?>
+                <div class = "buttonHolder">
+                    <h3> Dont Have an account?</h3>
+                    <a href="http://localhost/Lean-Six-Sigma/signupPage.php">
+                    <button>Signup</button>
+                    </a>
+                </div>
+                <?php else: // Show a logout link if the user is logged in ?>
+                    <div class = "buttonHolder">
+                    <h3> Have a Problem?</h3>
+                    <a href="http://localhost/Lean-Six-Sigma/postProblemPage.php">
+                    <button>Post Here</button>
+                    </a>
+                </div>
+                <?php endif; ?>
 
     <!-- footer -->
     <footer class="footer">
