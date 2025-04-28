@@ -49,13 +49,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Post Problems | Jogablogwen Code Recovery</title>
+    <link rel="icon" type="image/x-icon" href="images/favicon.ico">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/index.css">
-    <link rel="icon" type="image/x-icon" href="images/favicon.ico">
-    <title>Post Problems | Jogablogwen Code Recovery</title>
 </head>
 <body>
-    <!-- navbar -->
+    <!-- Navbar -->
     <header class="main-header">
         <div class="logo">
             <h1>Jogablogwen <span>Code Recovery</span></h1>
@@ -65,15 +65,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <ul>
                 <li><a href="index.php">Home</a></li>
                 <li><a href="problemPage.php">Problem</a></li>
-                <li><a href="postProblemPage.php">Post a Problem</a></li>
+                <li><a href="postProblemPage.php">Post a Problem?</a></li>
                 <li><a href="profile.php">Profile</a></li>
                 <li><a href="logout.php">Logout</a></li>
             </ul>
         </nav>
     </header>
 
-
-    <!-- script to make nav bar reactive -->
+    <!-- Navbar Scroll Script -->
     <script>
         let prevScrollPos = window.pageYOffset;
         const header = document.querySelector(".main-header");
@@ -82,38 +81,45 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             let currentScrollPos = window.pageYOffset;
 
             if (prevScrollPos > currentScrollPos) {
-            header.style.top = "0";
+                header.style.top = "0";
             } else {
-            header.style.top = "-100px"; // Adjust based on header height
+                header.style.top = "-100px"; 
             }
 
             prevScrollPos = currentScrollPos;
         };
     </script>
 
-    <!-- Welcome -->
-    <form method="POST" action="postProblemPage.php">
-    <h1 class="problem-page">Post Your Problem Here</h1>
-    <textarea name="problem" rows="10" cols="50"></textarea>
-    <br>
-    <input type="submit" name="submit" value="Submit">
-    </form>
-        <!-- footer -->
+    <!-- Post Problem Content -->
+    <div class="profile-container">
+        <h1 class="problem-page">Post Your Problem Here</h1>
+
+        <?php if (isset($success)): ?>
+            <p class="success-message"><?= htmlspecialchars($success) ?></p>
+        <?php endif; ?>
+
+        <?php if (isset($error)): ?>
+            <p class="error-message"><?= htmlspecialchars($error) ?></p>
+        <?php endif; ?>
+
+        <form method="POST" action="postProblemPage.php" class="profile-form">
+            <label for="problem">Describe Your Problem:</label><br>
+            <textarea class="problem-textarea" name="problem" id="problem" rows="10" cols="50" placeholder="Write your problem here..." required></textarea><br><br>
+            <input type="submit" name="submit" value="Submit">
+        </form>
+    </div>
+
+    <!-- Footer -->
     <footer class="footer">
-    <div class="footer-content">
-        <p>&copy; 2025 Jogablogwen Code Recovery. All rights reserved.</p>
-        <div class="footer-links">
-            <a href="index.php">Home</a>
-            <a href="problemPage.php">Problem</a>
-            <?php if (!$isLoggedIn): // Show these links only if the user is not logged in ?>
+        <div class="footer-content">
+            <p>&copy; 2025 Jogablogwen Code Recovery. All rights reserved.</p>
+            <div class="footer-links">
+                <a href="index.php">Home</a>
+                <a href="problemPage.php">Problem</a>
                 <a href="signupPage.php">Signup</a>
                 <a href="loginPage.php">Login</a>
-            <?php else: // Show a logout link if the user is logged in ?>
-                <a href="profile.php">Profile</a>
-                <a href="postProblemPage.php">Post a Problem</a>
-            <?php endif; ?>
+            </div>
         </div>
-    </div>
     </footer>
 </body>
 </html>
