@@ -101,7 +101,7 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
         </form>
     </div>
 
-   < <!-- footer -->
+    <!-- footer -->
     <footer class="footer">
     <div class="footer-content">
         <p>&copy; 2025 Jogablogwen Code Recovery. All rights reserved.</p>
