@@ -4,11 +4,7 @@ session_start(); // Start the session
 require_once 'DBConn.php';
 // Include your User class
 require_once 'User.php';
-// Check if the user is logged in
-if (!isset($_SESSION['user_id'])) {
-    header("Location: loginPage.php");
-    exit(); // VERY important after header redirect
-}
+
 // Create a new database connection
 $db = new DBConn();
 $db->open();
@@ -129,11 +125,16 @@ $isLoggedIn = isset($_SESSION['user_id']); // Assuming 'user_id' is set in the s
                                 <li>No comments yet.</li>
                             <?php endif; ?>
                         </ul>
-                        <form method="POST" class="comment-form">
+                        <?php if (!$isLoggedIn): ?>
+                            <h5>Must be logged in to comment</h5>
+                        <?php else:?>
+                            <form method="POST" class="comment-form">
                             <input type="hidden" name="problem_id" value="<?php echo $problem['id']; ?>">
                             <textarea name="comment" placeholder="Write a comment..." required></textarea>
                             <button type="submit">Post Comment</button>
                         </form>
+                        <?php endif; ?>
+                        
 
                     <!-- Delete Problem Button (Visible only to the owner) -->
                     <?php if ($isLoggedIn && $problem['user_id'] == $_SESSION['user_id']): ?>
