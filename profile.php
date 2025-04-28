@@ -2,6 +2,8 @@
 session_start();
 require_once('User.php');
 $user = new User();
+// Example: Check if the user is logged in
+$isLoggedIn = isset($_SESSION['user_id']); // Assuming 'user_id' is set in the session when logged in
 
 if (!isset($_SESSION['user_id'])) {
     header("Location: loginPage.php");
@@ -99,8 +101,8 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
         </form>
     </div>
 
-   <!-- footer -->
-   <footer class="footer">
+   < <!-- footer -->
+    <footer class="footer">
     <div class="footer-content">
         <p>&copy; 2025 Jogablogwen Code Recovery. All rights reserved.</p>
         <div class="footer-links">
@@ -111,7 +113,7 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
                 <a href="loginPage.php">Login</a>
             <?php else: // Show a logout link if the user is logged in ?>
                 <a href="profile.php">Profile</a>
-                <a href="postProblemPage.php">Got A Problem</a>
+                <a href="postProblemPage.php">Post a Problem</a>
             <?php endif; ?>
         </div>
     </div>

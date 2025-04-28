@@ -5,7 +5,9 @@ require_once 'DBConn.php';
     //makes it so you must be logged in to be on this page
    
     session_start();
-
+    // Example: Check if the user is logged in
+    $isLoggedIn = isset($_SESSION['user_id']); // Assuming 'user_id' is set in the session when logged in
+    
     if(!isset($_SESSION['user_id'])){
         header("Location: loginPage.php");
         exit(); // VERY important after header redirect
@@ -108,7 +110,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <a href="loginPage.php">Login</a>
             <?php else: // Show a logout link if the user is logged in ?>
                 <a href="profile.php">Profile</a>
-                <a href="postProblemPage.php">Got A Problem</a>
+                <a href="postProblemPage.php">Post a Problem</a>
             <?php endif; ?>
         </div>
     </div>
