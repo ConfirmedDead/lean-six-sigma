@@ -21,20 +21,33 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $db = new DBConn();
             $db->open();
 
-            // Prepare the SQL query to insert the user
-            $stmt = $db->conn->prepare("INSERT INTO users (username, password) VALUES (?, ?)");
-            $stmt->bind_param("ss", $username, $hashed_password);
+            // Prepare the SQL query to fetch the user
+            $stmt = $db->conn->prepare("SELECT id, password FROM users WHERE username = ?");
+            $stmt->bind_param("s", $username);
+            $stmt->execute();
+            $stmt->store_result();
 
-            // Execute the query
-            if ($stmt->execute()) {
-                $success = "Signup successful! You can now <a href='loginPage.php'>log in</a>.";
-            } else {
-                $error = "Username already exists. Please choose a different one.";
+            // Check if the user exists
+            if ($stmt->num_rows > 0) {
+                //username in use
+                $error = "Username Taken";
             }
+            else{
+                 // Prepare the SQL query to insert the user
+                $stmt = $db->conn->prepare("INSERT INTO users (username, password) VALUES (?, ?)");
+                $stmt->bind_param("ss", $username, $hashed_password);
 
+                // Execute the query
+                if ($stmt->execute()) {
+                    $success = "Signup successful! You can now <a href='loginPage.php'>log in</a>.";
+                } else {
+                    $error = "Username already exists. Please choose a different one.";
+                }
+            }
             // Close the statement and connection
             $stmt->close();
             $db->close();
+
         } else {
             $error = "Passwords do not match.";
         }

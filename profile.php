@@ -14,18 +14,39 @@ if (!isset($_SESSION['user_id'])) {
 if ($_SERVER['REQUEST_METHOD'] === "POST") {
     if (!empty($_POST['action'])) {
         if ($_POST['action'] == "update") {
+
             $newUsername = trim($_POST['new_username']);
-            if (!empty($newUsername)) {
-                if ($user->update($_SESSION['user_id'], $newUsername)) {   // <<< pass $newUsername too
-                    $_SESSION['username'] = $newUsername;
-                    $success = "Username updated successfully!";
-                } else {
-                    $error = "Failed to update username. Please try again.";
-                }
-            } else {
+
+            if (empty($newUsername)) {
                 $error = "Username cannot be empty.";
+            } else {
+                // Create a new database connection
+                $db = new DBConn();
+                $db->open();
+
+                // Prepare the SQL query to check if username already exists
+                $stmt = $db->conn->prepare("SELECT id FROM users WHERE username = ?");
+                $stmt->bind_param("s", $newUsername);
+                $stmt->execute();
+                $stmt->store_result();
+
+                if ($stmt->num_rows > 0) {
+                    // Username already taken
+                    $error = "Username taken.";
+                } else {
+                    // Username is available, proceed with update
+                    if ($user->update($_SESSION['user_id'], $newUsername)) {
+                        $_SESSION['username'] = $newUsername;
+                        $success = "Username updated successfully!";
+                    } else {
+                        $error = "Failed to update username. Please try again.";
+                    }
+                }
+
+                $stmt->close();
+                $db->close();
             }
-        } else if ($_POST['action'] == "delete") {
+        }else if ($_POST['action'] == "delete") {
             if (User::delete($_SESSION['user_id'])) {  // <<< static call (User::delete)
                 $_SESSION = array();
                 session_destroy();
