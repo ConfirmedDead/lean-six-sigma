@@ -12,6 +12,22 @@ if (!$isLoggedIn) {
     exit(); // VERY important after header redirect
 }
 
+function getUsernameById($userId, $conn) {
+    $username = "";
+    $stmt = $conn->prepare("SELECT username FROM users WHERE id = ?");
+    $stmt->bind_param("i", $userId);
+    $stmt->execute();
+    $stmt->bind_result($username);
+
+    if ($stmt->fetch()) {
+        $stmt->close();
+        return $username;
+    } else {
+        $stmt->close();
+        return "Unknown User";
+    }
+}
+
 // Create a new database connection
 $db = new DBConn();
 $db->open();
@@ -27,6 +43,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['comment'], $_POST['pr
         $problemId = intval($_POST['problem_id']);
         $comment = $conn->real_escape_string($_POST['comment']);
         $userId = intval($_SESSION['user_id']); // Fetch the logged-in user's ID
+
+        
 
         // Insert the comment with the user's ID
         $conn->query("INSERT INTO comments (problem_id, comment, user_id) VALUES ($problemId, '$comment', $userId)");
@@ -140,19 +158,21 @@ $isLoggedIn = isset($_SESSION['user_id']); // Assuming 'user_id' is set in the s
         <?php if ($problemsResult->num_rows > 0): ?>
             <?php while ($problem = $problemsResult->fetch_assoc()): ?>
                 <div class="problem">
-                        <h5>Posted By: <?php echo htmlspecialchars($problem['Author']); ?> </h5>
+                    <h5><?php echo "Posted by: " . htmlspecialchars(getUsernameById($problem['user_id'], $conn)); ?></h5>
                         <h3><?php echo htmlspecialchars($problem['title']); ?></h3>
                         <p><?php echo nl2br(htmlspecialchars($problem['description'])); ?></p>
 
                     <h4>Comments:</h4>
                         <ul>
+                        
                             <?php
                             $commentsQuery = "SELECT * FROM comments WHERE problem_id = " . $problem['id'];
                             $commentsResult = $conn->query($commentsQuery);
                             if ($commentsResult->num_rows > 0):
                                 while ($comment = $commentsResult->fetch_assoc()):
                             ?>
-                                <li><?php echo htmlspecialchars($comment['comment']); ?></li>
+                                <li><h5><?php echo htmlspecialchars(getUsernameById($comment['user_id'], $conn)); ?></h5>
+                                <?php echo htmlspecialchars($comment['comment']); ?></li>
                             <?php endwhile; else: ?>
                                 <li>No comments yet.</li>
                             <?php endif; ?>
