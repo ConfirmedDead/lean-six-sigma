@@ -219,13 +219,109 @@ body {
 
 
 
+.problem {
+    background-color: #1a1f2b; /* Darker blue-gray */
+    border: 1px solid #2d3445;
+    border-left: 4px solid #00e6d8; /* Teal accent */
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 25px;
+    box-shadow: 0 0 10px rgba(0, 230, 216, 0.1);
+    color: #ffffff;
+    transition: transform 0.2s ease;
+}
+
+.problem:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 0 15px rgba(0, 230, 216, 0.2);
+}
+
+.problem h3 {
+    color: #00e6d8; /* Teal title */
+    font-size: 22px;
+    margin-bottom: 10px;
+    font-weight: 600;
+}
+
+.problem p {
+    color: #d0d0d0;
+    font-size: 16px;
+    line-height: 1.6;
+    margin-bottom: 16px;
+}
+.problem h4 {
+    color: #00e6d8;
+    margin-bottom: 8px;
+    font-size: 18px;
+}
+
+.problem ul {
+    padding-left: 20px;
+    margin-bottom: 16px;
+}
+
+.problem li {
+    color: #cccccc;
+    margin-bottom: 6px;
+}
+
+.comment-form textarea {
+    background-color: #2b2f3a;
+    color: #ffffff;
+    border: 1px solid #444;
+    border-radius: 4px;
+    padding: 8px;
+    width: 100%;
+    resize: vertical;
+    margin-bottom: 8px;
+}
+
+.comment-form button {
+    background-color: #00e6d8;
+    border: none;
+    color: #000;
+    padding: 6px 12px;
+    font-weight: bold;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.comment-form button:hover {
+    background-color: #00c4b8;
+}
+.pagination {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.pagination a {
+    display: inline-block;
+    padding: 8px 12px;
+    margin: 0 4px;
+    background-color: #2b2f3a;
+    color: #00e6d8;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: background-color 0.2s;
+}
+
+.pagination a:hover {
+    background-color: #00e6d8;
+    color: #000;
+}
+
+.pagination a.active-page {
+    background-color: #00e6d8;
+    color: #000;
+    font-weight: bold;
+}
 
 
 
 /* post Problem Page */
 
 .problem-page {
-    color: rgba(128, 0, 128, 0.993);
+    color: #00BFFF;
     text-align: center;
     margin-top: 150px;
 }
@@ -396,4 +492,74 @@ body {
 }
 .loginTag a{
     color: inherit;
+}
+
+/* Profile Page*/
+
+.profile-container {
+    background-color: #0E213F;
+    color: #F4F4F4;
+    padding: 50px 30px;
+    margin: 275px auto 200px;
+    max-width: 600px;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0 0 15px #1CD8D2;
+}
+
+.profile-container h2 {
+    margin-bottom: 20px;
+    font-size: 28px;
+}
+
+.highlight {
+    color: #1CD8D2;
+}
+
+.profile-form {
+    margin-top: 20px;
+}
+
+.profile-form input[type="text"] {
+    padding: 10px;
+    width: 80%;
+    border: 1px solid #1CD8D2;
+    border-radius: 5px;
+    margin-bottom: 15px;
+    background-color: #0B1B36;
+    color: #F4F4F4;
+}
+
+.profile-form button {
+    background-color: #1CD8D2;
+    border: none;
+    padding: 10px 25px;
+    font-size: 16px;
+    font-weight: bold;
+    color: #0B1B36;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.profile-form button:hover {
+    background-color: #38B6FF;
+}
+
+.delete-form button {
+    background-color: #d81c3f;
+}
+
+.delete-form button:hover {
+    background-color: #ff4b5c;
+}
+
+.success-message {
+    color: #1CD8D2;
+    margin-bottom: 10px;
+}
+
+.error-message {
+    color: #ff4b5c;
+    margin-bottom: 10px;
 }

@@ -1,12 +1,37 @@
 <?php
-session_start();
-// Database connection
-$conn = new mysqli("10.4.52.67", "cruser", "password", "jogablogwen-code-recovery");
+session_start(); // Start the session
+// Include your database connection class
+require_once 'DBConn.php';
+// Include your User class
+require_once 'User.php';
 
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
 $isLoggedIn = isset($_SESSION['user_id']); // Assuming 'user_id' is set in the session when logged in
+
+if (!$isLoggedIn) {
+    header("Location: loginPage.php");
+    exit(); // VERY important after header redirect
+}
+
+function getUsernameById($userId, $conn) {
+    $username = "";
+    $stmt = $conn->prepare("SELECT username FROM users WHERE id = ?");
+    $stmt->bind_param("i", $userId);
+    $stmt->execute();
+    $stmt->bind_result($username);
+
+    if ($stmt->fetch()) {
+        $stmt->close();
+        return $username;
+    } else {
+        $stmt->close();
+        return "Unknown User";
+    }
+}
+
+// Create a new database connection
+$db = new DBConn();
+$db->open();
+$conn = $db->conn;
 
 // Fetch problems from the database
 $problemsQuery = "SELECT * FROM problems ORDER BY created_at DESC";
@@ -14,12 +39,48 @@ $problemsResult = $conn->query($problemsQuery);
 
 // Handle comment submission
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['comment'], $_POST['problem_id'])) {
-    $problemId = intval($_POST['problem_id']);
-    $comment = $conn->real_escape_string($_POST['comment']);
-    $conn->query("INSERT INTO comments (problem_id, comment) VALUES ($problemId, '$comment')");
+    if ($isLoggedIn) {
+        $problemId = intval($_POST['problem_id']);
+        $comment = $conn->real_escape_string($_POST['comment']);
+        $userId = intval($_SESSION['user_id']); // Fetch the logged-in user's ID
+
+        
+
+        // Insert the comment with the user's ID
+        $conn->query("INSERT INTO comments (problem_id, comment, user_id) VALUES ($problemId, '$comment', $userId)");
+        header("Location: problemPage.php");
+        exit;
+    } else {
+        echo "<p>You must be logged in to post a comment.</p>";
+    }
+}
+
+// Handle problem deletion
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['delete_problem_id'])) {
+    $problemId = intval($_POST['delete_problem_id']);
+    $userId = intval($_SESSION['user_id']); // Fetch the logged-in user's ID
+
+    // Ensure the logged-in user is the owner of the post
+    $deleteQuery = "DELETE FROM problems WHERE id = $problemId AND user_id = $userId";
+    $conn->query($deleteQuery);
     header("Location: problemPage.php");
     exit;
 }
+
+// Pagination settings
+$limit = 5; // Problems per page
+$page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+$offset = ($page - 1) * $limit;
+
+// Get total number of problems
+$totalResult = $conn->query("SELECT COUNT(*) AS total FROM problems");
+$totalRow = $totalResult->fetch_assoc();
+$totalProblems = $totalRow['total'];
+$totalPages = ceil($totalProblems / $limit);
+
+// Fetch paginated problems
+$problemsQuery = "SELECT * FROM problems ORDER BY created_at DESC LIMIT $limit OFFSET $offset";
+$problemsResult = $conn->query($problemsQuery);
 
 // Example: Check if the user is logged in
 $isLoggedIn = isset($_SESSION['user_id']); // Assuming 'user_id' is set in the session when logged in
@@ -49,7 +110,7 @@ $isLoggedIn = isset($_SESSION['user_id']); // Assuming 'user_id' is set in the s
                     <li><a href="signupPage.php">Signup</a></li>
                     <li><a href="loginPage.php">Login</a></li>
                 <?php else: // Show a logout link if the user is logged in ?>
-                    <li><a href="postProblemPage.php">Post a problem?</a></li>
+                    <li><a href="postProblemPage.php">Post a Problem</a></li>
                     <li><a href="profile.php">Profile</a></li>
                     <li><a href="logout.php">Logout</a></li>
                 <?php endif; ?>
@@ -91,38 +152,71 @@ $isLoggedIn = isset($_SESSION['user_id']); // Assuming 'user_id' is set in the s
         </p>
 
 
-         <!-- Problems Section -->
-        <section class="problems-section">
-            <h2>Community Problems</h2>
-            <?php if ($problemsResult->num_rows > 0): ?>
-                <?php while ($problem = $problemsResult->fetch_assoc()): ?>
-                    <div class="problem">
-                        
+          <!-- Problems Section -->
+    <section class="problems-section">
+        <h2>Community Problems</h2>
+        <?php if ($problemsResult->num_rows > 0): ?>
+            <?php while ($problem = $problemsResult->fetch_assoc()): ?>
+                <div class="problem">
+                    <h5><?php echo "Posted by: " . htmlspecialchars(getUsernameById($problem['user_id'], $conn)); ?></h5>
+                        <h3><?php echo htmlspecialchars($problem['title']); ?></h3>
                         <p><?php echo nl2br(htmlspecialchars($problem['description'])); ?></p>
-                        <h4>Comments:</h4>
+
+                    <h4>Comments:</h4>
                         <ul>
+                        
                             <?php
                             $commentsQuery = "SELECT * FROM comments WHERE problem_id = " . $problem['id'];
                             $commentsResult = $conn->query($commentsQuery);
                             if ($commentsResult->num_rows > 0):
                                 while ($comment = $commentsResult->fetch_assoc()):
                             ?>
-                                <li><?php echo htmlspecialchars($comment['comment']); ?></li>
+                                <li><h5><?php echo htmlspecialchars(getUsernameById($comment['user_id'], $conn)); ?></h5>
+                                <?php echo htmlspecialchars($comment['comment']); ?></li>
                             <?php endwhile; else: ?>
                                 <li>No comments yet.</li>
                             <?php endif; ?>
                         </ul>
-                        <form method="POST" class="comment-form">
+                        <?php if (!$isLoggedIn): ?>
+                            <h5>Must be logged in to comment</h5>
+                        <?php else:?>
+                            
+                            <form method="POST" class="comment-form">
                             <input type="hidden" name="problem_id" value="<?php echo $problem['id']; ?>">
                             <textarea name="comment" placeholder="Write a comment..." required></textarea>
                             <button type="submit">Post Comment</button>
                         </form>
-                    </div>
-                <?php endwhile; ?>
+                        <?php endif; ?>
+                        
+
+                    <!-- Delete Problem Button (Visible only to the owner) -->
+                    <?php if ($isLoggedIn && $problem['user_id'] == $_SESSION['user_id']): ?>
+                        <form method="POST" action="">
+                            <input type="hidden" name="delete_problem_id" value="<?php echo $problem['id']; ?>">
+                            <button type="submit" class="delete-button">Delete Post</button>
+                        </form>
+                    <?php endif; ?>
+
+                  
+
+                </div>
+            <?php endwhile; ?>
             <?php else: ?>
-                <p>No problems posted yet.</p>
+                <p>No problems have been posted yet.</p>
             <?php endif; ?>
         </section>
+
+
+        <?php if ($totalPages > 1): ?>
+            <div class="pagination">
+                <?php for ($i = 1; $i <= $totalPages; $i++): ?>
+                    <a href="?page=<?php echo $i; ?>" 
+                    class="<?php echo $i == $page ? 'active-page' : ''; ?>">
+                    <?php echo $i; ?>
+                    </a>
+                <?php endfor; ?>
+            </div>
+        <?php endif; ?>
 
                
         <div class = "buttonHolder">
@@ -139,16 +233,20 @@ $isLoggedIn = isset($_SESSION['user_id']); // Assuming 'user_id' is set in the s
 
    
 
-    <!-- Footer -->
-       <!-- footer -->
-       <footer class="footer">
+    <!-- footer -->
+    <footer class="footer">
     <div class="footer-content">
         <p>&copy; 2025 Jogablogwen Code Recovery. All rights reserved.</p>
         <div class="footer-links">
             <a href="index.php">Home</a>
-            <a href="postProblemPage.php">Got A Problem</a>
-            <a href="signupPage.php">Signup</a>
-            <a href="loginPage.php">Login</a>
+            <a href="problemPage.php">Problem</a>
+            <?php if (!$isLoggedIn): // Show these links only if the user is not logged in ?>
+                <a href="signupPage.php">Signup</a>
+                <a href="loginPage.php">Login</a>
+            <?php else: // Show a logout link if the user is logged in ?>
+                <a href="profile.php">Profile</a>
+                <a href="postProblemPage.php">Post a Problem</a>
+            <?php endif; ?>
         </div>
     </div>
     </footer>
