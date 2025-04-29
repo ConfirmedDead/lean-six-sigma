@@ -111,7 +111,9 @@ $isLoggedIn = isset($_SESSION['user_id']); // Assuming 'user_id' is set in the s
         <?php if ($problemsResult->num_rows > 0): ?>
             <?php while ($problem = $problemsResult->fetch_assoc()): ?>
                 <div class="problem">
-                    <p><?php echo nl2br(htmlspecialchars($problem['description'])); ?></p>
+                        <h3><?php echo htmlspecialchars($problem['title']); ?></h3>
+                        <p><?php echo nl2br(htmlspecialchars($problem['description'])); ?></p>
+
                     <h4>Comments:</h4>
                         <ul>
                             <?php

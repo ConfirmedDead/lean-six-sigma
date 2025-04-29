@@ -16,31 +16,37 @@ if (!$isLoggedIn) {
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Retrieve the problem from the form
     $problem = $_POST['problem'];
+    $title = $_POST['title'];
     $userId = $_SESSION['user_id']; // Get the logged-in user's ID
 
     // Check if the problem is not empty
-    if (!empty($problem)) {
-        // Create a new database connection
-        $db = new DBConn();
-        $db->open();
-
-        // Prepare the SQL query to insert the problem with the user_id
-        $stmt = $db->conn->prepare("INSERT INTO problems (description, user_id) VALUES (?, ?)");
-        $stmt->bind_param("si", $problem, $userId);
-
-        // Execute the query and check for success
-        if ($stmt->execute()) {
-            echo "<p>Problem posted successfully!</p>";
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        $problem = $_POST['problem'];
+        $title = $_POST['title'];
+        $userId = $_SESSION['user_id']; // Logged-in user's ID
+    
+        if (!empty($problem) && !empty($title)) {
+            // Connect to DB
+            $db = new DBConn();
+            $db->open();
+    
+            // Insert both title and problem into the same row
+            $stmt = $db->conn->prepare("INSERT INTO problems (title, description, user_id) VALUES (?, ?, ?)");
+            $stmt->bind_param("ssi", $title, $problem, $userId);
+    
+            if ($stmt->execute()) {
+                $success = "Problem posted successfully!";
+            } else {
+                $error = "Failed to post the problem. Please try again.";
+            }
+    
+            $stmt->close();
+            $db->close();
         } else {
-            echo "<p>Failed to post the problem. Please try again.</p>";
+            $error = "Please fill in both the title and problem description.";
         }
-
-        // Close the statement and database connection
-        $stmt->close();
-        $db->close();
-    } else {
-        echo "<p>Please enter a problem description.</p>";
     }
+    
 }
 ?>
 <!DOCTYPE html>
@@ -102,11 +108,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <?php endif; ?>
 
         <form method="POST" action="postProblemPage.php" class="profile-form">
+            <label for="title">Title:</label><br>
+            <textarea class="title-textarea" name="title" id="title" rows="2" cols="50" placeholder="Write your title here..." required></textarea><br><br>
+
             <label for="problem">Describe Your Problem:</label><br>
             <textarea class="problem-textarea" name="problem" id="problem" rows="10" cols="50" placeholder="Write your problem here..." required></textarea><br><br>
+
             <input type="submit" name="submit" value="Submit">
         </form>
     </div>
+
 
   <!-- footer -->
  <footer class="footer">
