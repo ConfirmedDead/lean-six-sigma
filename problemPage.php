@@ -126,6 +126,7 @@ $isLoggedIn = isset($_SESSION['user_id']); // Assuming 'user_id' is set in the s
         <?php if ($problemsResult->num_rows > 0): ?>
             <?php while ($problem = $problemsResult->fetch_assoc()): ?>
                 <div class="problem">
+                        <h5>Posted By: <?php echo htmlspecialchars($problem['Author']); ?> </h5>
                         <h3><?php echo htmlspecialchars($problem['title']); ?></h3>
                         <p><?php echo nl2br(htmlspecialchars($problem['description'])); ?></p>
 
@@ -145,6 +146,7 @@ $isLoggedIn = isset($_SESSION['user_id']); // Assuming 'user_id' is set in the s
                         <?php if (!$isLoggedIn): ?>
                             <h5>Must be logged in to comment</h5>
                         <?php else:?>
+                            
                             <form method="POST" class="comment-form">
                             <input type="hidden" name="problem_id" value="<?php echo $problem['id']; ?>">
                             <textarea name="comment" placeholder="Write a comment..." required></textarea>
@@ -160,13 +162,17 @@ $isLoggedIn = isset($_SESSION['user_id']); // Assuming 'user_id' is set in the s
                             <button type="submit" class="delete-button">Delete Post</button>
                         </form>
                     <?php endif; ?>
+
+                  
+
                 </div>
             <?php endwhile; ?>
-        <?php else: ?>
-            <p>No problems have been posted yet.</p>
-        <?php endif; ?>
-
+            <?php else: ?>
+                <p>No problems have been posted yet.</p>
+            <?php endif; ?>
         </section>
+
+
         <?php if ($totalPages > 1): ?>
             <div class="pagination">
                 <?php for ($i = 1; $i <= $totalPages; $i++): ?>
