@@ -35,6 +35,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['delete_problem_id']))
     exit;
 }
 
+// Pagination settings
+$limit = 5; // Problems per page
+$page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+$offset = ($page - 1) * $limit;
+
+// Get total number of problems
+$totalResult = $conn->query("SELECT COUNT(*) AS total FROM problems");
+$totalRow = $totalResult->fetch_assoc();
+$totalProblems = $totalRow['total'];
+$totalPages = ceil($totalProblems / $limit);
+
+// Fetch paginated problems
+$problemsQuery = "SELECT * FROM problems ORDER BY created_at DESC LIMIT $limit OFFSET $offset";
+$problemsResult = $conn->query($problemsQuery);
+
 // Example: Check if the user is logged in
 $isLoggedIn = isset($_SESSION['user_id']); // Assuming 'user_id' is set in the session when logged in
 ?>
@@ -152,6 +167,16 @@ $isLoggedIn = isset($_SESSION['user_id']); // Assuming 'user_id' is set in the s
         <?php endif; ?>
 
         </section>
+        <?php if ($totalPages > 1): ?>
+            <div class="pagination">
+                <?php for ($i = 1; $i <= $totalPages; $i++): ?>
+                    <a href="?page=<?php echo $i; ?>" 
+                    class="<?php echo $i == $page ? 'active-page' : ''; ?>">
+                    <?php echo $i; ?>
+                    </a>
+                <?php endfor; ?>
+            </div>
+        <?php endif; ?>
 
                
         <div class = "buttonHolder">
