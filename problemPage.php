@@ -5,11 +5,17 @@ require_once 'DBConn.php';
 // Include your User class
 require_once 'User.php';
 
+$isLoggedIn = isset($_SESSION['user_id']); // Assuming 'user_id' is set in the session when logged in
+
+if (!$isLoggedIn) {
+    header("Location: loginPage.php");
+    exit(); // VERY important after header redirect
+}
+
 // Create a new database connection
 $db = new DBConn();
 $db->open();
 $conn = $db->conn;
-
 
 // Fetch problems from the database
 $problemsQuery = "SELECT * FROM problems ORDER BY created_at DESC";
@@ -17,17 +23,25 @@ $problemsResult = $conn->query($problemsQuery);
 
 // Handle comment submission
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['comment'], $_POST['problem_id'])) {
-    $problemId = intval($_POST['problem_id']);
-    $comment = $conn->real_escape_string($_POST['comment']);
-    $conn->query("INSERT INTO comments (problem_id, comment) VALUES ($problemId, '$comment')");
-    header("Location: problemPage.php");
-    exit;
+    if ($isLoggedIn) {
+        $problemId = intval($_POST['problem_id']);
+        $comment = $conn->real_escape_string($_POST['comment']);
+        $userId = intval($_SESSION['user_id']); // Fetch the logged-in user's ID
+
+        // Insert the comment with the user's ID
+        $conn->query("INSERT INTO comments (problem_id, comment, user_id) VALUES ($problemId, '$comment', $userId)");
+        header("Location: problemPage.php");
+        exit;
+    } else {
+        echo "<p>You must be logged in to post a comment.</p>";
+    }
 }
 
 // Handle problem deletion
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['delete_problem_id'])) {
     $problemId = intval($_POST['delete_problem_id']);
-    $userId = $_SESSION['user_id']; // Assuming 'user_id' is stored in the session
+    $userId = intval($_SESSION['user_id']); // Fetch the logged-in user's ID
+
     // Ensure the logged-in user is the owner of the post
     $deleteQuery = "DELETE FROM problems WHERE id = $problemId AND user_id = $userId";
     $conn->query($deleteQuery);
