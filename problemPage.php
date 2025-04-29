@@ -1,12 +1,15 @@
 <?php
-session_start();
-// Database connection
-$conn = new mysqli("10.4.52.67", "cruser", "password", "jogablogwen-code-recovery");
+session_start(); // Start the session
+// Include your database connection class
+require_once 'DBConn.php';
+// Include your User class
+require_once 'User.php';
 
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
-$isLoggedIn = isset($_SESSION['user_id']); // Assuming 'user_id' is set in the session when logged in
+// Create a new database connection
+$db = new DBConn();
+$db->open();
+$conn = $db->conn;
+
 
 // Fetch problems from the database
 $problemsQuery = "SELECT * FROM problems ORDER BY created_at DESC";
@@ -20,6 +23,32 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['comment'], $_POST['pr
     header("Location: problemPage.php");
     exit;
 }
+
+// Handle problem deletion
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['delete_problem_id'])) {
+    $problemId = intval($_POST['delete_problem_id']);
+    $userId = $_SESSION['user_id']; // Assuming 'user_id' is stored in the session
+    // Ensure the logged-in user is the owner of the post
+    $deleteQuery = "DELETE FROM problems WHERE id = $problemId AND user_id = $userId";
+    $conn->query($deleteQuery);
+    header("Location: problemPage.php");
+    exit;
+}
+
+// Pagination settings
+$limit = 5; // Problems per page
+$page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+$offset = ($page - 1) * $limit;
+
+// Get total number of problems
+$totalResult = $conn->query("SELECT COUNT(*) AS total FROM problems");
+$totalRow = $totalResult->fetch_assoc();
+$totalProblems = $totalRow['total'];
+$totalPages = ceil($totalProblems / $limit);
+
+// Fetch paginated problems
+$problemsQuery = "SELECT * FROM problems ORDER BY created_at DESC LIMIT $limit OFFSET $offset";
+$problemsResult = $conn->query($problemsQuery);
 
 // Example: Check if the user is logged in
 $isLoggedIn = isset($_SESSION['user_id']); // Assuming 'user_id' is set in the session when logged in
@@ -91,15 +120,16 @@ $isLoggedIn = isset($_SESSION['user_id']); // Assuming 'user_id' is set in the s
         </p>
 
 
-         <!-- Problems Section -->
-        <section class="problems-section">
-            <h2>Community Problems</h2>
-            <?php if ($problemsResult->num_rows > 0): ?>
-                <?php while ($problem = $problemsResult->fetch_assoc()): ?>
-                    <div class="problem">
-                        
+          <!-- Problems Section -->
+    <section class="problems-section">
+        <h2>Community Problems</h2>
+        <?php if ($problemsResult->num_rows > 0): ?>
+            <?php while ($problem = $problemsResult->fetch_assoc()): ?>
+                <div class="problem">
+                        <h3><?php echo htmlspecialchars($problem['title']); ?></h3>
                         <p><?php echo nl2br(htmlspecialchars($problem['description'])); ?></p>
-                        <h4>Comments:</h4>
+
+                    <h4>Comments:</h4>
                         <ul>
                             <?php
                             $commentsQuery = "SELECT * FROM comments WHERE problem_id = " . $problem['id'];
@@ -112,17 +142,41 @@ $isLoggedIn = isset($_SESSION['user_id']); // Assuming 'user_id' is set in the s
                                 <li>No comments yet.</li>
                             <?php endif; ?>
                         </ul>
-                        <form method="POST" class="comment-form">
+                        <?php if (!$isLoggedIn): ?>
+                            <h5>Must be logged in to comment</h5>
+                        <?php else:?>
+                            <form method="POST" class="comment-form">
                             <input type="hidden" name="problem_id" value="<?php echo $problem['id']; ?>">
                             <textarea name="comment" placeholder="Write a comment..." required></textarea>
                             <button type="submit">Post Comment</button>
                         </form>
-                    </div>
-                <?php endwhile; ?>
-            <?php else: ?>
-                <p>No problems posted yet.</p>
-            <?php endif; ?>
+                        <?php endif; ?>
+                        
+
+                    <!-- Delete Problem Button (Visible only to the owner) -->
+                    <?php if ($isLoggedIn && $problem['user_id'] == $_SESSION['user_id']): ?>
+                        <form method="POST" action="">
+                            <input type="hidden" name="delete_problem_id" value="<?php echo $problem['id']; ?>">
+                            <button type="submit" class="delete-button">Delete Post</button>
+                        </form>
+                    <?php endif; ?>
+                </div>
+            <?php endwhile; ?>
+        <?php else: ?>
+            <p>No problems have been posted yet.</p>
+        <?php endif; ?>
+
         </section>
+        <?php if ($totalPages > 1): ?>
+            <div class="pagination">
+                <?php for ($i = 1; $i <= $totalPages; $i++): ?>
+                    <a href="?page=<?php echo $i; ?>" 
+                    class="<?php echo $i == $page ? 'active-page' : ''; ?>">
+                    <?php echo $i; ?>
+                    </a>
+                <?php endfor; ?>
+            </div>
+        <?php endif; ?>
 
                
         <div class = "buttonHolder">

@@ -2,46 +2,51 @@
 // Include your database connection class
 require_once 'DBConn.php';
 
-    //makes it so you must be logged in to be on this page
-   
-    session_start();
-    // Example: Check if the user is logged in
-    $isLoggedIn = isset($_SESSION['user_id']); // Assuming 'user_id' is set in the session when logged in
-    
-    if(!isset($_SESSION['user_id'])){
-        header("Location: loginPage.php");
-        exit(); // VERY important after header redirect
-    }
+// Makes it so you must be logged in to be on this page
+session_start();
 
+// Example: Check if the user is logged in
+$isLoggedIn = isset($_SESSION['user_id']); // Assuming 'user_id' is set in the session when logged in
 
+if (!$isLoggedIn) {
+    header("Location: loginPage.php");
+    exit(); // VERY important after header redirect
+}
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Retrieve the problem from the form
     $problem = $_POST['problem'];
+    $title = $_POST['title'];
+    $userId = $_SESSION['user_id']; // Get the logged-in user's ID
 
     // Check if the problem is not empty
-    if (!empty($problem)) {
-        // Create a new database connection
-        $db = new DBConn();
-        $db->open();
-
-        // Prepare the SQL query to insert the problem
-        $stmt = $db->conn->prepare("INSERT INTO problems (description) VALUES (?)");
-        $stmt->bind_param("s", $problem);
-
-        // Execute the query and check for success
-        if ($stmt->execute()) {
-            echo "<p>Problem posted successfully!</p>";
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        $problem = $_POST['problem'];
+        $title = $_POST['title'];
+        $userId = $_SESSION['user_id']; // Logged-in user's ID
+    
+        if (!empty($problem) && !empty($title)) {
+            // Connect to DB
+            $db = new DBConn();
+            $db->open();
+    
+            // Insert both title and problem into the same row
+            $stmt = $db->conn->prepare("INSERT INTO problems (title, description, user_id) VALUES (?, ?, ?)");
+            $stmt->bind_param("ssi", $title, $problem, $userId);
+    
+            if ($stmt->execute()) {
+                $success = "Problem posted successfully!";
+            } else {
+                $error = "Failed to post the problem. Please try again.";
+            }
+    
+            $stmt->close();
+            $db->close();
         } else {
-            echo "<p>Error: " . $stmt->error . "</p>";
+            $error = "Please fill in both the title and problem description.";
         }
-
-        // Close the statement and connection
-        $stmt->close();
-        $db->close();
-    } else {
-        echo "<p>Please enter your problem.</p>";
     }
+    
 }
 ?>
 <!DOCTYPE html>
@@ -65,7 +70,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <ul>
                 <li><a href="index.php">Home</a></li>
                 <li><a href="problemPage.php">Problem</a></li>
-                <li><a href="postProblemPage.php">Post a Problem?</a></li>
+                <li><a href="postProblemPage.php">Post a Problem</a></li>
                 <li><a href="profile.php">Profile</a></li>
                 <li><a href="logout.php">Logout</a></li>
             </ul>
@@ -103,23 +108,28 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <?php endif; ?>
 
         <form method="POST" action="postProblemPage.php" class="profile-form">
+            <label for="title">Title:</label><br>
+            <textarea class="title-textarea" name="title" id="title" rows="2" cols="50" placeholder="Write your title here..." required></textarea><br><br>
+
             <label for="problem">Describe Your Problem:</label><br>
             <textarea class="problem-textarea" name="problem" id="problem" rows="10" cols="50" placeholder="Write your problem here..." required></textarea><br><br>
+
             <input type="submit" name="submit" value="Submit">
         </form>
     </div>
 
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="footer-content">
-            <p>&copy; 2025 Jogablogwen Code Recovery. All rights reserved.</p>
-            <div class="footer-links">
-                <a href="index.php">Home</a>
-                <a href="problemPage.php">Problem</a>
-                <a href="signupPage.php">Signup</a>
-                <a href="loginPage.php">Login</a>
-            </div>
+
+  <!-- footer -->
+ <footer class="footer">
+    <div class="footer-content">
+        <p>&copy; 2025 Jogablogwen Code Recovery. All rights reserved.</p>
+        <div class="footer-links">
+            <a href="index.php">Home</a>
+            <a href="problemPage.php">Problem</a>
+                <a href="profile.php">Profile</a>
+                <a href="postProblemPage.php">Post a Problem</a>
         </div>
+    </div>
     </footer>
 </body>
 </html>
