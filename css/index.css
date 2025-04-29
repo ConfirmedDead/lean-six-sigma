@@ -227,7 +227,7 @@ body {
     padding: 20px;
     margin-bottom: 25px;
     box-shadow: 0 0 10px rgba(0, 230, 216, 0.1);
-    color: #ffffff;
+    color: #1CD8D2;
     transition: transform 0.2s ease;
 }
 
@@ -498,7 +498,7 @@ body {
 
 .profile-container {
     background-color: #0E213F;
-    color: #F4F4F4;
+    color: #1CD8D2;
     padding: 50px 30px;
     margin: 275px auto 200px;
     max-width: 600px;
