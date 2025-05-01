@@ -227,7 +227,7 @@ body {
     padding: 20px;
     margin-bottom: 25px;
     box-shadow: 0 0 10px rgba(0, 230, 216, 0.1);
-    color: #ffffff;
+    color: #1CD8D2;
     transition: transform 0.2s ease;
 }
 
@@ -498,7 +498,7 @@ body {
 
 .profile-container {
     background-color: #0E213F;
-    color: #F4F4F4;
+    color: #1CD8D2;
     padding: 50px 30px;
     margin: 275px auto 200px;
     max-width: 600px;
@@ -562,4 +562,87 @@ body {
 .error-message {
     color: #ff4b5c;
     margin-bottom: 10px;
+}
+/* Post page Problem */
+
+/* Container for the post form */
+.profile-container {
+    max-width: 800px;
+    margin: 150px auto 60px;
+    padding: 30px;
+    background-color: #111c2b;
+    box-shadow: 0 4px 12px rgba(0, 255, 255, 0.1);
+    border-radius: 12px;
+    color: #e0f7ff;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Title styling */
+.problem-page {
+    font-size: 2rem;
+    text-align: center;
+    margin-bottom: 20px;
+    color: #1CD8D2;
+}
+
+/* Success and error messages */
+.success-message {
+    background-color: #003f2d;
+    color: #32ffb8;
+    padding: 12px;
+    border: 1px solid #00ffa2;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
+.error-message {
+    background-color: #330000;
+    color: #ff6b6b;
+    padding: 12px;
+    border: 1px solid #ff4d4d;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
+/* Form labels and textareas */
+.profile-form label {
+    font-weight: bold;
+    display: block;
+    margin-bottom: 6px;
+    color: #ffffff;
+}
+
+.profile-form textarea {
+    width: 100%;
+    padding: 12px;
+    background-color: #1c2b3a;
+    border-radius: 8px;
+    border: 1px solid #1CD8D2;
+    color: #ffffff;
+    font-size: 1rem;
+    resize: vertical;
+    margin-bottom: 20px;
+    transition: border-color 0.3s ease;
+}
+
+.profile-form textarea:focus {
+    border-color: #ffffff;
+    outline: none;
+}
+
+/* Submit button */
+.profile-form input[type="submit"] {
+    background-color: #1CD8D2;
+    color: #001d2e;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.profile-form input[type="submit"]:hover {
+    background-color: #38B6FF;
 }
